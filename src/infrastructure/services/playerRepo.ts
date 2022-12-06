@@ -1,5 +1,4 @@
 import { PlayerTypes } from '../models/player.types';
-import { PlayerRepository } from './repository';
 
 const URL = 'http://localhost:7700/';
 
