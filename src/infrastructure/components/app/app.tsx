@@ -1,10 +1,12 @@
+import { Login } from '../../../pages/login/login';
 import { Register } from '../../../pages/register/register';
 
 export function App() {
     return (
         <div>
-            App inicial de React
+            Tengo Fulbo
             <Register></Register>
+            <Login></Login>
         </div>
     );
 }

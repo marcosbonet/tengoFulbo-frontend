@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ProtoPlayer } from '../../infrastructure/models/player.types';
 import { PlayerRepo } from '../../infrastructure/services/playerRepo';
 
-export function Register() {
+export function Login() {
     const initialState: ProtoPlayer = {
         playerName: '',
         password: '',
@@ -18,8 +18,13 @@ export function Register() {
 
     const handleSubmit = async (ev: React.SyntheticEvent) => {
         ev.preventDefault();
-        await player.register(data);
+        const token = await player.login(data);
+        localStorage.setItem('token', token);
     };
+    // if (!localStorage.getItem('token')) {
+    //     return <div> This player is not register</div>;
+    // }
+
     return (
         <>
             <h2>Tengo Fulbo</h2>
@@ -42,8 +47,16 @@ export function Register() {
                         onInput={handleInput}
                     />
                 </div>
-
-                <button type="submit">Register</button>
+                <div>
+                    <input
+                        name="email"
+                        type="email"
+                        placeholder="email"
+                        value={data.email}
+                        onInput={handleInput}
+                    />
+                </div>
+                <button type="submit">Login</button>
             </form>
         </>
     );
