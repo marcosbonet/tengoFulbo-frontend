@@ -5,9 +5,10 @@ export type MatchTypes = {
     place: string;
     date: string;
     image: string;
-    players: Array<PlayerTypes>;
+    players?: Array<PlayerTypes>;
 };
 export type ProtoMatch = {
+    id?: string;
     place?: string;
     date?: string;
     image?: string;
