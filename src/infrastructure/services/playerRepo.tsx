@@ -3,6 +3,12 @@ import { PlayerTypes } from '../models/player.types';
 const URL = 'http://localhost:7700/';
 
 export class PlayerRepo {
+    #createError(response: Response) {
+        const message = `Error ${response.status}: ${response.statusText}`;
+        const error = new Error(message);
+        error.name = 'HTTPError';
+        return error;
+    }
     register(data: { [key: string]: string }): Promise<PlayerTypes> {
         const url = URL + 'players/register';
         return fetch(url, {
@@ -25,7 +31,17 @@ export class PlayerRepo {
             .then((response) => response.json())
             .then((resjson) => resjson.token);
     }
-    // delete(id:number): Promise<void>{
-    //     return fetch(url)+'players/'
-    // }
+    delete(id: number): Promise<void> {
+        const url = URL + `players/${id}`;
+
+        return fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        }).then((response) => {
+            if (response.ok) throw this.#createError(response);
+        });
+    }
 }
