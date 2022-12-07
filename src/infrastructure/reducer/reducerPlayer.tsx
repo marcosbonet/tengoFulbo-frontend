@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { PlayerTypes } from '../models/player.types';
+
 import * as ac from './actionCreatorPlayer';
 
 const initialState: {
