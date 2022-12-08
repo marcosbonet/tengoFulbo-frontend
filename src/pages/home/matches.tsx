@@ -2,8 +2,8 @@ import { useMatch } from '../../infrastructure/hooks/useMatch';
 
 export const Match = () => {
     const { matches } = useMatch();
-    console.log(matches, '1');
 
+    console.log(matches, '1');
     return matches.length ? (
         <>
             <p>{matches[0].place}</p>

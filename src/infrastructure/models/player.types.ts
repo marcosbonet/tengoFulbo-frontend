@@ -7,6 +7,12 @@ export type PlayerTypes = {
     email: string;
     matches: Array<MatchTypes>;
 };
+
+export type PlayerWithToken = {
+    player: PlayerTypes;
+    token: string;
+};
+
 export type ProtoPlayer = {
     playerName?: string;
     password?: string;

@@ -3,7 +3,7 @@ import { MatchTypes, ProtoMatch } from '../models/match.types';
 const URL = 'http://localhost:7700/';
 
 export class MatchRepo {
-    #createError(response: Response) {
+    createError(response: Response) {
         const message = `Error ${response.status}: ${response.statusText}`;
         const error = new Error(message);
         error.name = 'HTTPError';
@@ -17,13 +17,19 @@ export class MatchRepo {
             headers: {
                 'Content-Type': 'application/json',
             },
-        }).then((response) => response.json());
+        })
+            .then((response) => response.json())
+            .catch((error) => {
+                return `${error}`;
+            });
     }
     get(): Promise<Array<MatchTypes>> {
         const url = URL + 'matches/';
         return fetch(url).then((response) => {
-            if (response.ok) return response.json();
-            throw this.#createError(response);
+            if (response.ok)
+                return response.json().catch((error) => {
+                    return `${error}`;
+                });
         });
     }
     create(item: Partial<ProtoMatch>): Promise<MatchTypes> {
@@ -35,7 +41,11 @@ export class MatchRepo {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-        }).then((response) => response.json());
+        })
+            .then((response) => response.json())
+            .catch((error) => {
+                return `${error}`;
+            });
     }
 
     updatedelete(id: string): Promise<void> {
@@ -47,9 +57,11 @@ export class MatchRepo {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-        }).then((response) => {
-            if (response.ok) throw this.#createError(response);
-        });
+        })
+            .then((response) => response.json())
+            .catch((error) => {
+                return `${error}`;
+            });
     }
     updateadd(id: string): Promise<void> {
         const url = URL + `matches/update/${id}`;
@@ -60,8 +72,10 @@ export class MatchRepo {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-        }).then((response) => {
-            if (response.ok) throw this.#createError(response);
-        });
+        })
+            .then((response) => response.json())
+            .catch((error) => {
+                return `${error}`;
+            });
     }
 }

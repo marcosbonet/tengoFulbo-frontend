@@ -1,37 +1,48 @@
-import { PlayerTypes } from '../models/player.types';
+import {
+    PlayerTypes,
+    PlayerWithToken,
+    ProtoPlayer,
+} from '../models/player.types';
 
 const URL = 'http://localhost:7700/';
 
 export class PlayerRepo {
-    #createError(response: Response) {
+    createError(response: Response) {
         const message = `Error ${response.status}: ${response.statusText}`;
         const error = new Error(message);
         error.name = 'HTTPError';
         return error;
     }
-    register(data: { [key: string]: string }): Promise<PlayerTypes> {
+    register(player: ProtoPlayer): Promise<PlayerTypes> {
         const url = URL + 'players/register';
         return fetch(url, {
             method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then((response) => response.json());
-    }
-    login(data: { [key: string]: string }): Promise<string> {
-        const url = URL + 'players/login';
-        return fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(player),
             headers: {
                 'Content-Type': 'application/json',
             },
         })
             .then((response) => response.json())
-            .then((resjson) => resjson.token);
+            .catch((error) => {
+                return `${error}`;
+            });
     }
-    delete(id: number): Promise<void> {
+    login(player: ProtoPlayer): Promise<PlayerWithToken> {
+        const url = URL + 'players/login';
+        return fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(player),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+
+            .catch((error) => {
+                return `${error}`;
+            });
+    }
+    delete(id: string): Promise<{ id: string }> {
         const url = URL + `players/${id}`;
 
         return fetch(url, {
@@ -40,8 +51,10 @@ export class PlayerRepo {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-        }).then((response) => {
-            if (response.ok) throw this.#createError(response);
-        });
+        })
+            .then((response) => response.json())
+            .catch((error) => {
+                return `${error}`;
+            });
     }
 }

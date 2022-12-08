@@ -11,22 +11,6 @@ export const MatchReducer = createReducer(initialState, (builder) => {
         ...state,
         action.payload,
     ]);
-    builder.addCase(ac.deleteActionCreator, (state, action) => ({
-        ...state.filter((item) =>
-            item.id === action.payload.id ? action.payload : item
-        ),
-    }));
-
-    builder.addCase(ac.updateAddActionCreator, (state, action) => ({
-        ...state.map((item) =>
-            item.id === action.payload.id ? action.payload : item
-        ),
-    }));
-    builder.addCase(ac.updateDeleteActionCreator, (state, action) => ({
-        ...state.filter((item) =>
-            item.id === action.payload.id ? action.payload : item
-        ),
-    }));
 
     builder.addDefaultCase((state) => state);
 });
