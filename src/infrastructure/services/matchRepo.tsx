@@ -19,14 +19,14 @@ export class MatchRepo {
             },
         }).then((response) => response.json());
     }
-    get(): Promise<Array<string>> {
+    get(): Promise<Array<MatchTypes>> {
         const url = URL + 'matches/';
         return fetch(url).then((response) => {
             if (response.ok) return response.json();
             throw this.#createError(response);
         });
     }
-    create(item: Partial<ProtoMatch>): Promise<ProtoMatch> {
+    create(item: Partial<ProtoMatch>): Promise<MatchTypes> {
         const url = URL + 'matches/';
         return fetch(url, {
             method: 'POST',
@@ -38,7 +38,7 @@ export class MatchRepo {
         }).then((response) => response.json());
     }
 
-    updatedelete(id: number): Promise<void> {
+    updatedelete(id: string): Promise<void> {
         const url = URL + `matches/delete/${id}`;
 
         return fetch(url, {
@@ -51,7 +51,7 @@ export class MatchRepo {
             if (response.ok) throw this.#createError(response);
         });
     }
-    updateadd(id: number): Promise<void> {
+    updateadd(id: string): Promise<void> {
         const url = URL + `matches/update/${id}`;
 
         return fetch(url, {

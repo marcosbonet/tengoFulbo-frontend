@@ -1,6 +1,7 @@
 export const actionMatchTypes = {
     create: 'match@create',
-    update: 'match@update',
+    updateadd: 'match@updateadd',
+    updatedelete: 'match@updatedelete',
     load: 'match@load',
     delete: 'match@delete',
     select: 'match@select',

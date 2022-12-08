@@ -1,9 +1,4 @@
 export const actionPlayerTypes = {
-    startLogin: 'player@startLogin',
-    // isloged: false
-    // islodging:true
-    //user:null
-    //token:''
     login: 'player@login',
     // isloged: true
     // islodging:false
@@ -14,8 +9,4 @@ export const actionPlayerTypes = {
     // islodging: false
     //user:null
     //token:''
-    updateAdd: 'player@updateAdd',
-    //user: user
-    updatedelete: 'player@updatedelete',
-    //user:user
 };

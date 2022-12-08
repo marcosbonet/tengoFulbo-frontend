@@ -5,8 +5,11 @@ import { actionMatchTypes } from './actionTypesMatch';
 export const createActionCreator = createAction<MatchTypes>(
     actionMatchTypes.create
 );
-export const updateActionCreator = createAction<MatchTypes>(
-    actionMatchTypes.update
+export const updateAddActionCreator = createAction<MatchTypes>(
+    actionMatchTypes.updatedelete
+);
+export const updateDeleteActionCreator = createAction<MatchTypes>(
+    actionMatchTypes.updateadd
 );
 
 export const loadActionCreator = createAction<Array<MatchTypes>>(
