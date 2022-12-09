@@ -1,3 +1,4 @@
+import { MatchTypes } from '../models/match.types';
 import {
     PlayerTypes,
     PlayerWithToken,
@@ -47,6 +48,41 @@ export class PlayerRepo {
 
         return fetch(url, {
             method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+            .then((response) => response.json())
+            .catch((error) => {
+                return `${error}`;
+            });
+    }
+    updateadd(
+        id: string,
+        ProtoMatch: Partial<MatchTypes>
+    ): Promise<MatchTypes> {
+        const url = URL + `matches/update/${id}`;
+
+        return fetch(url, {
+            method: 'PATCH',
+            body: JSON.stringify(ProtoMatch),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+            .then((response) => response.json())
+            .catch((error) => {
+                return `${error}`;
+            });
+    }
+
+    updatedelete(id: string): Promise<void> {
+        const url = URL + `matches/delete/${id}`;
+
+        return fetch(url, {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,

@@ -1,4 +1,5 @@
 import { MatchTypes, ProtoMatch } from '../models/match.types';
+import { PlayerTypes } from '../models/player.types';
 
 const URL = 'http://localhost:7700/';
 
@@ -37,37 +38,6 @@ export class MatchRepo {
         return fetch(url, {
             method: 'POST',
             body: JSON.stringify(item),
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
-            .then((response) => response.json())
-            .catch((error) => {
-                return `${error}`;
-            });
-    }
-
-    updatedelete(id: string): Promise<void> {
-        const url = URL + `matches/delete/${id}`;
-
-        return fetch(url, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
-            .then((response) => response.json())
-            .catch((error) => {
-                return `${error}`;
-            });
-    }
-    updateadd(id: string): Promise<void> {
-        const url = URL + `matches/update/${id}`;
-
-        return fetch(url, {
-            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,

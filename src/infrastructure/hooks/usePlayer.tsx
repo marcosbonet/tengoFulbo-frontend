@@ -6,7 +6,7 @@ import * as ac from '../reducer/actionCreatorPlayer';
 
 import { PlayerRepo } from '../services/playerRepo';
 import { PlayerTypes, ProtoPlayer } from '../models/player.types';
-import { MatchTypes } from '../models/match.types';
+
 import { MatchRepo } from '../services/matchRepo';
 
 export const usePlayer = () => {
@@ -31,6 +31,7 @@ export const usePlayer = () => {
             .then(() => dispatcher(ac.logoutActionCreator()));
         localStorage.clear();
     };
+
     const handleUpdateAddMatch = (updateMatch: PlayerTypes) => {
         apiMatch
             .updateadd(updateMatch.id)

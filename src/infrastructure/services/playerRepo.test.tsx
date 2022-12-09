@@ -1,4 +1,6 @@
+import { MatchTypes } from '../models/match.types';
 import { PlayerTypes } from '../models/player.types';
+import { MatchRepo } from './matchRepo';
 
 import { PlayerRepo } from './playerRepo';
 
@@ -9,11 +11,28 @@ const mockPlayer: PlayerTypes = {
     id: '5432',
     matches: [],
 };
+const matchMock: MatchTypes = {
+    id: '',
+    place: '',
+    date: '',
+    image: '',
+    players: [],
+};
+
+const updatedMock: MatchTypes = {
+    id: 'test',
+    place: '123',
+    date: '123',
+    image: '123',
+    players: [],
+};
 describe('given de PlayerRepo', () => {
     let service: PlayerRepo;
+    let serviceMatch: MatchRepo;
     const error = new Error('Error');
     beforeEach(() => {
         service = new PlayerRepo();
+        serviceMatch = new MatchRepo();
     });
     describe('When we intantiate Register', () => {
         test('then it should return a new player', async () => {
@@ -71,5 +90,55 @@ describe('given de PlayerRepo', () => {
         await service.delete(mockPlayer.id);
         expect(fetch).toHaveBeenCalled();
         expect(error).toBeInstanceOf(Error);
+    });
+    describe('When we instantiate UPDATEDELETE()', () => {
+        test('Then it should add a users favorite place', async () => {
+            global.fetch = jest.fn().mockResolvedValue({
+                ok: true,
+                json: jest.fn().mockResolvedValue(matchMock),
+            });
+
+            const result = await service.updatedelete(updatedMock.toString());
+            expect(fetch).toHaveBeenCalled();
+            expect(result).toEqual(matchMock);
+        });
+
+        test('Then if something goes wrong, it should throw an ERROR', async () => {
+            global.fetch = jest.fn().mockRejectedValue({
+                ok: false,
+                status: 404,
+                statusText: 'error',
+            });
+            await service.updatedelete(updatedMock.toString());
+            expect(fetch).toHaveBeenCalled();
+            expect(error).toBeInstanceOf(Error);
+        });
+    });
+    describe('When we instantiate UPDATEADD(),', () => {
+        test('Then it should add a users favorite place', async () => {
+            global.fetch = jest.fn().mockResolvedValue({
+                ok: true,
+                json: jest.fn().mockResolvedValue(matchMock),
+            });
+
+            const result = await service.updateadd(updatedMock.id, {
+                players: matchMock.players,
+            });
+            expect(fetch).toHaveBeenCalled();
+            expect(result).toEqual(matchMock);
+        });
+
+        test('Then if something goes wrong, it should throw an ERROR', async () => {
+            global.fetch = jest.fn().mockRejectedValue({
+                ok: false,
+                status: 404,
+                statusText: 'error',
+            });
+            await service.updateadd(updatedMock.id, {
+                players: matchMock.players,
+            });
+            expect(fetch).toHaveBeenCalled();
+            expect(error).toBeInstanceOf(Error);
+        });
     });
 });

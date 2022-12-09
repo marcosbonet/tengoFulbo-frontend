@@ -42,9 +42,6 @@ export const PlayerReducer = createReducer(initialState, (builder) => {
                 (match) => match.id !== action.payload.id
             ),
         } as PlayerTypes,
-        // ...state.filter((item) =>
-        //     item.id === action.payload.id ? action.payload : item
-        // ),
     }));
 
     builder.addDefaultCase((state) => state);

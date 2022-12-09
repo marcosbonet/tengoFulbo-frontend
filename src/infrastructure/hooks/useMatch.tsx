@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MatchRepo } from '../services/matchRepo';
 import { rootState } from '../store/store';
 import * as ac from '../reducer/actionCreatorMatch';
-import { MatchTypes, ProtoMatch } from '../models/match.types';
+import { ProtoMatch } from '../models/match.types';
 
 export const useMatch = () => {
     const matches = useSelector((state: rootState) => state.matches);

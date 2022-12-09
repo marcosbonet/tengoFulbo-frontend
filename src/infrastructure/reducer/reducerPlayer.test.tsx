@@ -17,7 +17,6 @@ describe('Given the function PlayerReducer', () => {
         date: '',
         image: '',
     };
-    
 
     let action: { type: string; payload: PlayerWithToken };
     let state: {
@@ -55,6 +54,53 @@ describe('Given the function PlayerReducer', () => {
         beforeEach(() => {
             action = {
                 type: actionPlayerTypes.logout,
+                payload: { player: null, token: null, isLogged: false },
+            };
+            state = {
+                isLogged: true,
+                player: {
+                    email: '',
+                    id: '',
+                    matches: [],
+                    password: '',
+                    playerName: '',
+                },
+
+                token: 'null',
+            };
+        });
+        test('Then the returned state should include the action payload', () => {
+            const result = PlayerReducer(state, action);
+            expect(result).toEqual(action.payload);
+        });
+    });
+    describe('When the action is UPDATEAPP', () => {
+        test('Then the return state should include the updated action payload', () => {
+            action = {
+                type: actionPlayerTypes.updateAdd,
+                payload: { player: PlayerMock, token: 'token' },
+            };
+            state = {
+                ...state,
+                isLogged: true,
+                player: {
+                    email: '',
+                    id: '123',
+                    matches: [],
+                    password: '',
+                    playerName: '',
+                },
+                token: 'token',
+            };
+            const result = PlayerReducer(state, action);
+            expect(result.player).toEqual(action.payload?.player);
+        });
+    });
+
+    describe('When the action is DELETEFAV', () => {
+        test('Then the return state should include the updated action payload', () => {
+            action = {
+                type: actionPlayerTypes.updateDelete,
                 payload: { player: PlayerMock, token: 'token' },
             };
             state = {
@@ -67,81 +113,10 @@ describe('Given the function PlayerReducer', () => {
                     playerName: '',
                 },
 
-                token: null,
+                token: 'null',
             };
-        });
-        test('Then the returned state should include the action payload', () => {
             const result = PlayerReducer(state, action);
-            expect(result).toEqual(action.payload);
+            expect(result.player?.matches).toEqual([]);
         });
     });
-     describe('When the action is update', () => {
-         beforeEach(() => {
-             action = {
-                 type: actionPlayerTypes.,
-                 payload: [matchMock],
-             };
-             state = [matchMock];
-         });
-         test('Then the returned state should include the action payload', () => {
-             const result = PlayerReducer(state, action);
-             expect(result).toEqual(action.payload);
-         });
-     });
-
-     describe('When the action is update and the id is not valid', () => {
-         beforeEach(() => {
-             action = {
-                 type: actionMatchTypes.load,
-                 payload: [matchMock],
-             };
-             state = [matchMock];
-         });
-         test('Then the returned state should be the original state', () => {
-             const result = PlayerReducer(state, action);
-             expect(result).toEqual(state);
-         });
-     });
-
-     describe('When the action is delete', () => {
-         beforeEach(() => {
-             action = {
-                 type: actionPlayerTypes.delete,
-                 payload: [matchMock],
-             };
-             state = [matchMock];
-         });
-         test('Then the returned state should not include the action payload', () => {
-             const result = PlayerReducer(state, action);
-             expect(result).toEqual([matchMock]);
-         });
-     });
-
-     describe('When the action is delete and the id is not valid', () => {
-         beforeEach(() => {
-             action = {
-                 type: actionPlayerTypes.load,
-                 payload: [matchMock],
-             };
-             state = [matchMock];
-         });
-         test('Then the returned state should should be the original state', () => {
-             const result = PlayerReducer(state, action);
-             expect(result).toEqual(state);
-         });
-     });
-
-     describe('When the action is any other', () => {
-         beforeEach(() => {
-             action = {
-                 type: actionPlayerTypes.,
-                 payload: [matchMock],
-             };
-             state = [matchMock];
-         });
-         test('Then the returned state should be ...', () => {
-             const result = PlayerReducer(state, action);
-             expect(result).toEqual(state);
-         });
-     });
 });
