@@ -1,31 +1,47 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { PlayerTypes } from '../models/player.types';
 
 import * as ac from './actionCreatorPlayer';
 
 const initialState: {
     isLogged: boolean;
-    playerName: string;
-    password: string;
-    token: string;
+    player: PlayerTypes | null;
+    token: string | null;
 } = {
     isLogged: false,
-    playerName: '',
-    password: '',
-    token: '',
+    player: null,
+    token: null,
 };
 
 export const PlayerReducer = createReducer(initialState, (builder) => {
     builder.addCase(ac.loginActionCreator, (state, action) => ({
         ...state,
-        token: action.payload || '',
-        loginActionCreator: !!action.payload,
-        playerName: action.payload,
-        password: action.payload,
+        isLogged: true,
+        token: action.payload.token,
+        player: action.payload.player,
     }));
     builder.addCase(ac.logoutActionCreator, (state) => ({
         ...state,
-        token: '',
-        logoutActionCreator: false,
+        token: null,
+        isLogged: false,
+        player: null,
+    }));
+
+    builder.addCase(ac.updateAddActionCreator, (state, action) => ({
+        ...state,
+        player: {
+            ...state.player,
+            matches: [...(state.player as PlayerTypes).matches],
+        } as PlayerTypes,
+    }));
+    builder.addCase(ac.updateDeleteActionCreator, (state, action) => ({
+        ...state,
+        player: {
+            ...state.player,
+            matches: (state.player as PlayerTypes).matches.filter(
+                (match) => match.id !== action.payload.id
+            ),
+        } as PlayerTypes,
     }));
 
     builder.addDefaultCase((state) => state);

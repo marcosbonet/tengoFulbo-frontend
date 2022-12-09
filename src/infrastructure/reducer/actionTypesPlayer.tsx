@@ -15,7 +15,6 @@ export const actionPlayerTypes = {
     //user:null
     //token:''
     updateAdd: 'player@updateAdd',
-    //user: user
-    updatedelete: 'player@updatedelete',
-    //user:user
+    updateDelete: 'player@updateDelete',
+    delete: 'player@delete',
 };
