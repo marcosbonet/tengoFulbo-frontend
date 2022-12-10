@@ -20,6 +20,7 @@ export const PlayerReducer = createReducer(initialState, (builder) => {
         token: action.payload.token,
         player: action.payload.player,
     }));
+
     builder.addCase(ac.logoutActionCreator, (state) => ({
         ...state,
         token: null,
@@ -31,7 +32,7 @@ export const PlayerReducer = createReducer(initialState, (builder) => {
         ...state,
         player: {
             ...state.player,
-            matches: [...(state.player as PlayerTypes).matches],
+            matches: [...(state.player as PlayerTypes).matches, action.payload],
         } as PlayerTypes,
     }));
     builder.addCase(ac.updateDeleteActionCreator, (state, action) => ({

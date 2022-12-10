@@ -1,6 +1,6 @@
 import { PlayerTypes } from './player.types';
 
-export type MatchTypes = {
+export type MatchType = {
     id: string;
     place: string;
     date: string;

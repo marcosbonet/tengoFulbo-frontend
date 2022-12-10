@@ -1,6 +1,6 @@
-import { MatchTypes, ProtoMatch } from '../models/match.types';
+import { MatchType, ProtoMatch } from '../models/match.types';
 import { MatchRepo } from './matchRepo';
-const matchMock: MatchTypes = {
+const matchMock: MatchType = {
     id: '',
     place: '',
     date: '',

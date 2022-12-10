@@ -1,4 +1,4 @@
-import { MatchTypes } from '../models/match.types';
+import { MatchType } from '../models/match.types';
 import {
     PlayerTypes,
     PlayerWithToken,
@@ -58,15 +58,11 @@ export class PlayerRepo {
                 return `${error}`;
             });
     }
-    updateadd(
-        id: string,
-        ProtoMatch: Partial<MatchTypes>
-    ): Promise<MatchTypes> {
+    updateadd(id: string): Promise<MatchType> {
         const url = URL + `matches/update/${id}`;
 
         return fetch(url, {
             method: 'PATCH',
-            body: JSON.stringify(ProtoMatch),
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,

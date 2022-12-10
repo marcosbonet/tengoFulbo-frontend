@@ -1,11 +1,17 @@
 import { createAction } from '@reduxjs/toolkit';
-import { MatchTypes } from '../models/match.types';
-import { actionMatchTypes } from './actionTypesMatch';
+import { MatchType } from '../models/match.types';
+import { actionMatchType } from './actionTypesMatch';
 
-export const createActionCreator = createAction<MatchTypes>(
-    actionMatchTypes.create
+export const createActionCreator = createAction<MatchType>(
+    actionMatchType.create
 );
 
-export const loadActionCreator = createAction<Array<MatchTypes>>(
-    actionMatchTypes.load
+export const loadActionCreator = createAction<Array<MatchType>>(
+    actionMatchType.load
+);
+export const updateAddActionCreator = createAction<MatchType>(
+    actionMatchType.updateAdd
+);
+export const updateDeleteActionCreator = createAction<MatchType>(
+    actionMatchType.updateDelete
 );

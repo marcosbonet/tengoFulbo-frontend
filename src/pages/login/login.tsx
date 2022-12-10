@@ -1,33 +1,34 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { ProtoPlayer } from '../../infrastructure/models/player.types';
-import { PlayerRepo } from '../../infrastructure/services/playerRepo';
 
 export function Login() {
+    const navigate = useNavigate();
     const initialState: ProtoPlayer = {
         playerName: '',
         password: '',
         email: '',
     };
-    const [data, setdata] = useState(initialState);
-    const player = new PlayerRepo();
 
-    const handleInput = (ev: React.SyntheticEvent) => {
+    const { handleLogin, player } = usePlayer();
+    const [data, setdata] = useState(initialState);
+
+    const handleInput = (ev: SyntheticEvent) => {
         const element = ev.target as HTMLFormElement;
         setdata({ ...data, [element.name]: element.value });
     };
 
-    const handleSubmit = async (ev: React.SyntheticEvent) => {
+    const handleSubmit = async (ev: SyntheticEvent) => {
         ev.preventDefault();
-        const token = await player.login(data);
-        localStorage.setItem('token', token);
+        await handleLogin(data)
+            .then(() => localStorage.setItem('token', player.token as string))
+            .then(() => navigate('/home'));
     };
-    // if (!localStorage.getItem('token')) {
-    //     return <div> This player is not register</div>;
-    // }
 
     return (
         <>
-            <h2>Tengo Fulbo</h2>
+            <h2 className="tittle">Tengo Fulbo</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <input

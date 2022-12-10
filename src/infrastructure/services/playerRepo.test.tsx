@@ -1,6 +1,5 @@
-import { MatchTypes } from '../models/match.types';
+import { MatchType } from '../models/match.types';
 import { PlayerTypes } from '../models/player.types';
-import { MatchRepo } from './matchRepo';
 
 import { PlayerRepo } from './playerRepo';
 
@@ -11,7 +10,7 @@ const mockPlayer: PlayerTypes = {
     id: '5432',
     matches: [],
 };
-const matchMock: MatchTypes = {
+const matchMock: MatchType = {
     id: '',
     place: '',
     date: '',
@@ -19,7 +18,7 @@ const matchMock: MatchTypes = {
     players: [],
 };
 
-const updatedMock: MatchTypes = {
+const updatedMock: MatchType = {
     id: 'test',
     place: '123',
     date: '123',
@@ -28,11 +27,10 @@ const updatedMock: MatchTypes = {
 };
 describe('given de PlayerRepo', () => {
     let service: PlayerRepo;
-    let serviceMatch: MatchRepo;
+
     const error = new Error('Error');
     beforeEach(() => {
         service = new PlayerRepo();
-        serviceMatch = new MatchRepo();
     });
     describe('When we intantiate Register', () => {
         test('then it should return a new player', async () => {

@@ -1,9 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 
-import { MatchTypes } from '../models/match.types';
+import { MatchType } from '../models/match.types';
 import * as ac from './actionCreatorMatch';
 
-const initialState: Array<MatchTypes> = [];
+const initialState: Array<MatchType> = [];
 
 export const MatchReducer = createReducer(initialState, (builder) => {
     builder.addCase(ac.loadActionCreator, (_state, action) => action.payload);
@@ -11,6 +11,13 @@ export const MatchReducer = createReducer(initialState, (builder) => {
         ...state,
         action.payload,
     ]);
+    builder.addCase(ac.updateDeleteActionCreator, (state, action) =>
+        state.filter((item) => item.id !== action.payload.id)
+    );
+
+    builder.addCase(ac.updateAddActionCreator, (state, action) =>
+        state.map((item) => (item === action.payload ? action.payload : item))
+    );
 
     builder.addDefaultCase((state) => state);
 });

@@ -1,9 +1,9 @@
-import { MatchTypes } from '../models/match.types';
-import { actionMatchTypes } from './actionTypesMatch';
+import { MatchType } from '../models/match.types';
+import { actionMatchType } from './actionTypesMatch';
 import { MatchReducer } from './reducerMatch';
 
 describe('Given the function MatchReducer', () => {
-    const matchMock: MatchTypes = {
+    const matchMock: MatchType = {
         id: '',
         place: '',
         date: '',
@@ -11,12 +11,12 @@ describe('Given the function MatchReducer', () => {
     };
 
     let action: { type: string; payload: unknown };
-    let state: Array<MatchTypes>;
+    let state: Array<MatchType>;
 
     describe('When the action is load', () => {
         beforeEach(() => {
             action = {
-                type: actionMatchTypes.load,
+                type: actionMatchType.load,
                 payload: [matchMock],
             };
             state = [];
@@ -30,7 +30,7 @@ describe('Given the function MatchReducer', () => {
     describe('When the action is Create', () => {
         beforeEach(() => {
             action = {
-                type: actionMatchTypes.load,
+                type: actionMatchType.load,
                 payload: [matchMock],
             };
             state = [];
