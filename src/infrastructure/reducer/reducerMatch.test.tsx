@@ -5,7 +5,7 @@ import { MatchReducer } from './reducerMatch';
 describe('Given the function MatchReducer', () => {
     const matchMock: MatchType = {
         id: '',
-        place: '',
+        places: '',
         date: '',
         image: '',
     };

@@ -8,12 +8,6 @@ import {
 const URL = 'http://localhost:7700/';
 
 export class PlayerRepo {
-    createError(response: Response) {
-        const message = `Error ${response.status}: ${response.statusText}`;
-        const error = new Error(message);
-        error.name = 'HTTPError';
-        return error;
-    }
     register(player: ProtoPlayer): Promise<PlayerTypes> {
         const url = URL + 'players/register';
         return fetch(url, {
@@ -22,11 +16,12 @@ export class PlayerRepo {
             headers: {
                 'Content-Type': 'application/json',
             },
-        })
-            .then((response) => response.json())
-            .catch((error) => {
-                return `${error}`;
-            });
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            throw new Error('Error of  Register');
+        });
     }
     login(player: ProtoPlayer): Promise<PlayerWithToken> {
         const url = URL + 'players/login';
@@ -36,15 +31,15 @@ export class PlayerRepo {
             headers: {
                 'Content-Type': 'application/json',
             },
-        })
-            .then((response) => response.json())
-
-            .catch((error) => {
-                return `${error}`;
-            });
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            throw new Error('Error of Login');
+        });
     }
-    delete(id: string): Promise<{ id: string }> {
-        const url = URL + `players/${id}`;
+    delete(): Promise<void> {
+        const url = URL + 'players/delete';
 
         return fetch(url, {
             method: 'DELETE',
@@ -52,14 +47,17 @@ export class PlayerRepo {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-        })
-            .then((response) => response.json())
-            .catch((error) => {
-                return `${error}`;
-            });
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            throw new Error('Error of delete player');
+        });
     }
     updateadd(id: string): Promise<MatchType> {
         const url = URL + `matches/update/${id}`;
+        const token = localStorage.getItem('token');
+        console.log(token, 'mostrar token');
 
         return fetch(url, {
             method: 'PATCH',
@@ -67,11 +65,12 @@ export class PlayerRepo {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-        })
-            .then((response) => response.json())
-            .catch((error) => {
-                return `${error}`;
-            });
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            throw new Error('Error of add match');
+        });
     }
 
     updatedelete(id: string): Promise<void> {
@@ -83,10 +82,11 @@ export class PlayerRepo {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-        })
-            .then((response) => response.json())
-            .catch((error) => {
-                return `${error}`;
-            });
+        }).then((res) => {
+            if (res.ok) {
+                return res.json();
+            }
+            throw new Error('Error of delete match');
+        });
     }
 }

@@ -9,15 +9,17 @@ export function ItemMatch({ item }: { item: MatchType }) {
     };
 
     return (
-        <li className="">
-            <img src={item.image} alt=""></img>
+        <>
+            <li className="">
+                <img src={item.image} alt=""></img>
 
-            <p>{item.date}</p>
-            <p>{item.place}</p>
+                <p>{item.date}</p>
+                <p>{item.places}</p>
 
-            <span className="button" onClick={handleClick} role="button">
-                🗑️
-            </span>
-        </li>
+                <span className="button" onClick={handleClick} role="button">
+                    ✚
+                </span>
+            </li>
+        </>
     );
 }

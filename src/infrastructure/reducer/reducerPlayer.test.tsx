@@ -13,7 +13,7 @@ describe('Given the function PlayerReducer', () => {
     };
     const matchMock: MatchType = {
         id: '',
-        place: '',
+        places: '',
         date: '',
         image: '',
     };

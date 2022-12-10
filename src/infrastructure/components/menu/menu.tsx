@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 export function Menu() {
     const menuOptions = [
         { id: '1', path: '/Home', label: 'Home' },
-        { id: '2', path: '/LoginPage', label: 'Login' },
-        { id: '3', path: '/RegisterPage', label: 'Register' },
+        { id: '2', path: '/Login', label: 'Login' },
+        { id: '3', path: '/Register', label: 'Register' },
+        { id: '4', path: '/Mymatches', label: 'My Matches' },
     ];
     return (
         <nav>

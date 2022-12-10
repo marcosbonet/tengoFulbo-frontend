@@ -12,7 +12,7 @@ const mockPlayer: PlayerTypes = {
 };
 const matchMock: MatchType = {
     id: '',
-    place: '',
+    places: '',
     date: '',
     image: '',
     players: [],
@@ -20,7 +20,7 @@ const matchMock: MatchType = {
 
 const updatedMock: MatchType = {
     id: 'test',
-    place: '123',
+    places: '123',
     date: '123',
     image: '123',
     players: [],
@@ -76,7 +76,7 @@ describe('given de PlayerRepo', () => {
                 ok: true,
                 json: jest.fn().mockResolvedValue(mockPlayer),
             });
-            const result = await service.delete(mockPlayer.id);
+            const result = await service.delete();
             expect(fetch).toHaveBeenCalled();
             expect(result).toBe(mockPlayer);
         });
@@ -85,12 +85,12 @@ describe('given de PlayerRepo', () => {
         global.fetch = jest
             .fn()
             .mockResolvedValue({ ok: false, status: 404, statusText: 'Error' });
-        await service.delete(mockPlayer.id);
+        await service.delete();
         expect(fetch).toHaveBeenCalled();
         expect(error).toBeInstanceOf(Error);
     });
     describe('When we instantiate UPDATEDELETE()', () => {
-        test('Then it should add a users favorite place', async () => {
+        test('Then it should add a users favorite places', async () => {
             global.fetch = jest.fn().mockResolvedValue({
                 ok: true,
                 json: jest.fn().mockResolvedValue(matchMock),
@@ -113,7 +113,7 @@ describe('given de PlayerRepo', () => {
         });
     });
     describe('When we instantiate UPDATEADD(),', () => {
-        test('Then it should add a users favorite place', async () => {
+        test('Then it should add a users favorite places', async () => {
             global.fetch = jest.fn().mockResolvedValue({
                 ok: true,
                 json: jest.fn().mockResolvedValue(matchMock),

@@ -27,7 +27,8 @@ export const usePlayer = () => {
     };
     const handleDelete = async (player: PlayerTypes) => {
         await apiPlayer
-            .delete(player.id)
+            .delete()
+            .then(() => dispatcher(ac.deleteActionCreator(player)))
             .then(() => dispatcher(ac.logoutActionCreator()));
         localStorage.clear();
     };

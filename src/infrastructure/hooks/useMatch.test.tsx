@@ -7,14 +7,14 @@ import { appStore } from '../store/store';
 jest.mock('../services/matchRepo');
 const mockMatch: MatchType = {
     id: '1234',
-    place: 'river',
+    places: 'river',
     image: 'papa',
     date: '3 de diciembre',
     players: [],
 };
 const newMockMatch: MatchType = {
     id: '123',
-    place: 'boca',
+    places: 'boca',
     image: 'papa',
     date: '4 de diciembre',
     players: [],
