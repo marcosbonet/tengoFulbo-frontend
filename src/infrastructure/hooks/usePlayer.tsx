@@ -41,13 +41,10 @@ export const usePlayer = () => {
             .catch((error: Error) => console.log(error.name, error.message));
     };
 
-    const handleUpdateDeletePlayer = async (
-        id: string,
-        updateMatch: Partial<MatchType>
-    ) => {
+    const handleUpdateDeletePlayer = async (idMatch: MatchType) => {
         await apiPlayer
-            .updatedelete(id)
-            .then(() => dispatcher(ac.updateDeleteActionCreator(updateMatch)))
+            .updatedelete(idMatch.id)
+            .then(() => dispatcher(ac.updateDeleteActionCreator(idMatch)))
             .catch((error: Error) => console.log(error.name, error.message));
     };
 

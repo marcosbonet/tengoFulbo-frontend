@@ -25,12 +25,14 @@ export class MatchRepo {
     }
     get(): Promise<Array<MatchType>> {
         const url = URL + 'matches/';
-        return fetch(url).then((response) => {
-            if (response.ok)
-                return response.json().catch((error) => {
-                    return `${error}`;
-                });
-        });
+        return fetch(url)
+            .then((response) => {
+                if (response.ok) return response.json();
+            })
+            .then((response) => response.matches)
+            .catch((error) => {
+                return `${error}`;
+            });
     }
     create(item: Partial<ProtoMatch>): Promise<MatchType> {
         const url = URL + 'matches/';

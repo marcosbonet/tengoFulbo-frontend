@@ -1,9 +1,9 @@
-import { Login } from '../login/login';
+import { MatchList } from '../../infrastructure/components/match/matchlist';
 
 export function Home() {
     return (
         <div>
-            <Login />
+            <MatchList />
         </div>
     );
 }

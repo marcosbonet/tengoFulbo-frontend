@@ -119,9 +119,7 @@ describe('given de PlayerRepo', () => {
                 json: jest.fn().mockResolvedValue(matchMock),
             });
 
-            const result = await service.updateadd(updatedMock.id, {
-                players: matchMock.players,
-            });
+            const result = await service.updateadd(updatedMock.id);
             expect(fetch).toHaveBeenCalled();
             expect(result).toEqual(matchMock);
         });
@@ -132,9 +130,7 @@ describe('given de PlayerRepo', () => {
                 status: 404,
                 statusText: 'error',
             });
-            await service.updateadd(updatedMock.id, {
-                players: matchMock.players,
-            });
+            await service.updateadd(updatedMock.id);
             expect(fetch).toHaveBeenCalled();
             expect(error).toBeInstanceOf(Error);
         });

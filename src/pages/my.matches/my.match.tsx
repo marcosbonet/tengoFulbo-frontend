@@ -1,31 +1,30 @@
 import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { MatchType } from '../../infrastructure/models/match.types';
 
-export function ItemMatch({ item }: { item: MatchType }) {
-    const { handleUpdateDeletePlayer, player } = usePlayer();
-    const playerArray = player;
+export function MyMatches({ match }: { match: MatchType }) {
+    const { handleUpdateDeletePlayer } = usePlayer();
 
-    // const handleClick = () => {
-    //     handleUpdateDeletePlayer(item.id);
-    // };
+    const handleClick = () => {
+        handleUpdateDeletePlayer(match);
+    };
 
     return (
         <li className="">
-            <img src={item.image}></img>
+            <img src={match.image} alt=""></img>
 
-            <p>{item.date}</p>
-            <p>{item.place}</p>
+            <p>{match.date}</p>
+            <p>{match.place}</p>
             <ul>
-                {item.players?.map((item) =>
-                    item.id === playerArray.player?.id
-                        ? playerArray.player.id
-                        : item.id
-                )}
+                {match.players?.map((player) => (
+                    <li>{player.playerName}</li>
+                ))}
             </ul>
 
-            {/* <span className="button" onClick={handleClick} role="button">
-                🗑️
-            </span> */}
+            {
+                <span className="button" onClick={handleClick} role="button">
+                    🗑️
+                </span>
+            }
         </li>
     );
 }

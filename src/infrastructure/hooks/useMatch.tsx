@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MatchRepo } from '../services/matchRepo';
 import { rootState } from '../store/store';
 import * as ac from '../reducer/actionCreatorMatch';
-import { ProtoMatch } from '../models/match.types';
+import { MatchType, ProtoMatch } from '../models/match.types';
 import { PlayerRepo } from '../services/playerRepo';
 
 export const useMatch = () => {
@@ -34,17 +34,17 @@ export const useMatch = () => {
             .catch((error: Error) => console.log(error.name, error.message));
     };
 
-    // const handleUpdateDeleteMatch = async (id: string) => {
-    //     await apiPlayer
-    //         .updatedelete(id)
-    //         .then(() => dispatcher(ac.updateDeleteActionCreator()))
-    //         .catch((error: Error) => console.log(error.name, error.message));
-    // };
+    const handleUpdateDeleteMatch = async (idMatch: MatchType) => {
+        await apiPlayer
+            .updatedelete(idMatch.id)
+            .then(() => dispatcher(ac.updateDeleteActionCreator(idMatch)))
+            .catch((error: Error) => console.log(error.name, error.message));
+    };
 
     return {
         matches,
         handleCreateMatch,
         handleUpdateAddMatch,
-        //handleUpdateDeleteMatch,
+        handleUpdateDeleteMatch,
     };
 };
