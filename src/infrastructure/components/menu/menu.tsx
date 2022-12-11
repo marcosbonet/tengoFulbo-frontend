@@ -5,7 +5,8 @@ export function Menu() {
         { id: '1', path: '/Home', label: 'Home' },
         { id: '2', path: '/Login', label: 'Login' },
         { id: '3', path: '/Register', label: 'Register' },
-        { id: '4', path: '/Mymatches', label: 'My Matches' },
+        { id: '4', path: '/MyMatchePage', label: 'My Matches' },
+        { id: '5', path: '/CreateMatchPage', label: 'Create Match ' },
     ];
     return (
         <nav>

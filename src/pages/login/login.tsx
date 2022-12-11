@@ -28,7 +28,7 @@ export function Login() {
 
     return (
         <>
-            <h2 className="tittle">Tengo Fulbo</h2>
+            <h2 className="tittle">Login</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <input
@@ -48,15 +48,7 @@ export function Login() {
                         onInput={handleInput}
                     />
                 </div>
-                <div>
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="email"
-                        value={data.email}
-                        onInput={handleInput}
-                    />
-                </div>
+
                 <button type="submit">Login</button>
             </form>
         </>

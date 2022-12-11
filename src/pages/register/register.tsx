@@ -22,7 +22,7 @@ export function Register() {
     };
     return (
         <>
-            <h2>Tengo Fulbo</h2>
+            <h2>Register</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <input
@@ -39,6 +39,15 @@ export function Register() {
                         type="password"
                         placeholder="password"
                         value={data.password}
+                        onInput={handleInput}
+                    />
+                </div>
+                <div>
+                    <input
+                        name="email"
+                        type="email"
+                        placeholder="email"
+                        value={data.email}
                         onInput={handleInput}
                     />
                 </div>

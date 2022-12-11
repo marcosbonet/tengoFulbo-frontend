@@ -1,4 +1,5 @@
 import { useMatch } from '../../hooks/useMatch';
+import { MatchType } from '../../models/match.types';
 import { ItemMatch } from './match';
 
 export const MatchList = () => {
@@ -7,9 +8,9 @@ export const MatchList = () => {
     return (
         <>
             <ul>
-                {matches.map((match) => (
+                {matches.map((match: MatchType) => (
                     <>
-                        <ItemMatch item={match}></ItemMatch>
+                        <ItemMatch key={match.id} item={match}></ItemMatch>
                     </>
                 ))}
             </ul>
