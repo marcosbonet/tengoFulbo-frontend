@@ -31,7 +31,9 @@ export class MatchRepo {
             .then((res) => {
                 return res.json();
             })
-            .then((res) => res.places)
+            .then((res) => {
+                return res.match;
+            })
             .catch((error) => {
                 return error;
             });

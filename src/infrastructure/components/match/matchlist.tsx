@@ -4,7 +4,7 @@ import { ItemMatch } from './match';
 
 export const MatchList = () => {
     const { matches } = useMatch();
-    console.log(matches);
+
     return (
         <>
             <ul>

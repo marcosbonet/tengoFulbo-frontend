@@ -1,12 +1,12 @@
-import { useMatch } from '../../infrastructure/hooks/useMatch';
+import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { MyMatches } from './my.match';
 
 export const MyMatchList = () => {
-    const { matches } = useMatch();
+    const { player } = usePlayer();
     return (
         <>
             <ul>
-                {matches.map((match) => (
+                {player.player?.matches.map((match) => (
                     <MyMatches match={match}></MyMatches>
                 ))}
             </ul>

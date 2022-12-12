@@ -34,6 +34,7 @@ export const usePlayer = () => {
     };
 
     const handleUpdateAddPlayer = async (idMatch: string) => {
+        console.log('3');
         await apiPlayer
             .updateadd(idMatch)
             .then((matchUpdated) =>

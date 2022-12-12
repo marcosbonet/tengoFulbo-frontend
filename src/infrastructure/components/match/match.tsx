@@ -2,14 +2,15 @@ import { useMatch } from '../../hooks/useMatch';
 import { usePlayer } from '../../hooks/usePlayer';
 
 import { MatchType } from '../../models/match.types';
-import { PlayerTypes } from '../../models/player.types';
+
 export function ItemMatch({ item }: { item: MatchType }) {
     const { handleUpdateAddMatch } = useMatch();
-    const { player } = usePlayer();
-    const playersmatch = player.player;
+    const { handleUpdateAddPlayer } = usePlayer();
 
     const handleClick = () => {
+        console.log(item.id);
         handleUpdateAddMatch(item.id);
+        handleUpdateAddPlayer(item.id);
     };
 
     return (
@@ -20,17 +21,7 @@ export function ItemMatch({ item }: { item: MatchType }) {
                 <p>{item.date}</p>
                 <p>{item.places}</p>
 
-                {(playersmatch as PlayerTypes).matches.length < 11 ? (
-                    <span
-                        className="button"
-                        onClick={handleClick}
-                        role="button"
-                    >
-                        add
-                    </span>
-                ) : (
-                    <></>
-                )}
+                <button onClick={handleClick}>➕</button>
             </li>
         </>
     );

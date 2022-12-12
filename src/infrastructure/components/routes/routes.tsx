@@ -12,7 +12,7 @@ export function AppRoutes() {
         <Routes>
             <Route path="Home" element={<Home />}></Route>
             <Route
-                path="Mymatches"
+                path="MyMatchesPage"
                 element={<MyMatchesPage></MyMatchesPage>}
             ></Route>
             <Route path="Register" element={<Register></Register>}></Route>

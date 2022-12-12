@@ -52,6 +52,7 @@ export class PlayerRepo {
             });
     }
     updateadd(id: string): Promise<MatchType> {
+        console.log('3');
         const url = URL + `matches/update/${id}`;
         const token = localStorage.getItem('token');
         console.log(token, 'mostrar token');
@@ -76,7 +77,7 @@ export class PlayerRepo {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${localStorage.removeItem('token')}`,
             },
         })
             .then((res) => res.json())

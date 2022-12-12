@@ -12,12 +12,19 @@ export const useMatch = () => {
     const dispatcher = useDispatch();
     const apiMatch = useMemo(() => new MatchRepo(), []);
     const apiPlayer = useMemo(() => new PlayerRepo(), []);
-    useEffect(() => {
+    const handleLoad = useCallback(() => {
         apiMatch
             .get()
-            .then((response) => dispatcher(ac.loadActionCreator(response)))
+            .then((response) => {
+                dispatcher(ac.loadActionCreator(response));
+                console.log(response);
+            })
             .catch((error: Error) => console.log(error.name, error.message));
     }, [apiMatch, dispatcher]);
+
+    useEffect(() => {
+        handleLoad();
+    }, [handleLoad]);
 
     const handleCreateMatch = (newMatch: ProtoMatch) => {
         apiMatch
@@ -26,11 +33,13 @@ export const useMatch = () => {
             .catch((error: Error) => console.log(error.name, error.message));
     };
     const handleUpdateAddMatch = async (idMatch: string) => {
+        console.log('2');
         await apiPlayer
             .updateadd(idMatch)
-            .then((matchUpdated) =>
-                dispatcher(ac.updateAddActionCreator(matchUpdated))
-            )
+            .then((matchUpdated) => {
+                console.log(matchUpdated);
+                dispatcher(ac.updateAddActionCreator(matchUpdated));
+            })
             .catch((error: Error) => console.log(error.name, error.message));
     };
 
@@ -43,7 +52,7 @@ export const useMatch = () => {
 
     return {
         matches,
-
+        handleLoad,
         handleCreateMatch,
         handleUpdateAddMatch,
         handleUpdateDeleteMatch,
