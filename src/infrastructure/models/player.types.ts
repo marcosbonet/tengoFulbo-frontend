@@ -9,8 +9,8 @@ export type PlayerTypes = {
 };
 
 export type PlayerWithToken = {
-    player: PlayerTypes;
-    token: string;
+    player: PlayerTypes | null;
+    token: string | null;
 };
 
 export type ProtoPlayer = {

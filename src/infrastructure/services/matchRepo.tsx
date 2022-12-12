@@ -27,11 +27,14 @@ export class MatchRepo {
         const url = URL + 'matches/';
         return fetch(url, {
             method: 'GET',
-        }).then((response) => {
-            if (response.ok)
-                return response.json().then((response) => response.match);
-            throw new Error('noseque');
-        });
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => res.places)
+            .catch((error) => {
+                return error;
+            });
     }
     create(item: Partial<ProtoMatch>): Promise<MatchType> {
         const url = URL + 'matches/';

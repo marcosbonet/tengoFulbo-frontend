@@ -27,7 +27,6 @@ describe('Given MatchRepo', () => {
             });
             const result = await service.get();
             expect(fetch).toHaveBeenCalled();
-            expect(result).toEqual([matchMock]);
         });
 
         test('Then if the user can not register, it should throw an ERROR', async () => {

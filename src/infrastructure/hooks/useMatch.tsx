@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MatchRepo } from '../services/matchRepo';
 import { rootState } from '../store/store';
@@ -43,6 +43,7 @@ export const useMatch = () => {
 
     return {
         matches,
+
         handleCreateMatch,
         handleUpdateAddMatch,
         handleUpdateDeleteMatch,

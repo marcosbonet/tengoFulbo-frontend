@@ -1,5 +1,4 @@
-import { MatchType } from '../models/match.types';
-import { PlayerTypes, PlayerWithToken } from '../models/player.types';
+import { PlayerTypes } from '../models/player.types';
 import { actionPlayerTypes } from './actionTypesPlayer';
 import { PlayerReducer } from './reducerPlayer';
 
@@ -11,28 +10,39 @@ describe('Given the function PlayerReducer', () => {
         email: '',
         matches: [],
     };
-    const matchMock: MatchType = {
-        id: '',
-        places: '',
-        date: '',
-        image: '',
-    };
 
-    let action: { type: string; payload: PlayerWithToken };
+    let action: { type: string; payload: unknown };
     let state: {
         isLogged: boolean;
-        player: PlayerTypes;
-        token: string;
+        player: PlayerTypes | null;
+        token: string | null;
     };
 
     describe('When the action is login', () => {
         beforeEach(() => {
             action = {
                 type: actionPlayerTypes.login,
-                payload: { player: PlayerMock, token: 'token' },
+                payload: { player: PlayerMock, token: 'token', isLogged: true },
             };
             state = {
-                isLogged: false,
+                ...state,
+            };
+        });
+        test('Then the returned state should be the action payload', () => {
+            const result = PlayerReducer(state, action);
+
+            expect(result).toEqual(action.payload);
+        });
+    });
+
+    describe('When the action is logout', () => {
+        beforeEach(() => {
+            action = {
+                type: actionPlayerTypes.logout,
+                payload: { isLogged: false, player: null, token: null },
+            };
+            state = {
+                isLogged: true,
                 player: {
                     email: '',
                     id: '',
@@ -40,40 +50,15 @@ describe('Given the function PlayerReducer', () => {
                     password: '',
                     playerName: '',
                 },
-                token: '',
+
+                token: 'null',
             };
         });
-        test('Then the returned state should be the action payload', () => {
+        test('Then the returned state should include the action payload', () => {
             const result = PlayerReducer(state, action);
-
-            expect(result).toEqual({ ...action.payload, isLogged: true });
+            expect(result).toEqual(action.payload);
         });
     });
-
-    // describe('When the action is logout', () => {
-    //     beforeEach(() => {
-    //         action = {
-    //             type: actionPlayerTypes.logout,
-    //             payload: { player: null, token: null, isLogged: false },
-    //         };
-    //         state = {
-    //             isLogged: true,
-    //             player: {
-    //                 email: '',
-    //                 id: '',
-    //                 matches: [],
-    //                 password: '',
-    //                 playerName: '',
-    //             },
-
-    //             token: 'null',
-    //         };
-    //     });
-    //     test('Then the returned state should include the action payload', () => {
-    //         const result = PlayerReducer(state, action);
-    //         expect(result).toEqual(action.payload);
-    //     });
-    // });
     describe('When the action is UPDATEAPP', () => {
         test('Then the return state should include the updated action payload', () => {
             action = {

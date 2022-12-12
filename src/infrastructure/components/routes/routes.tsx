@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { CreateMatchPage } from '../../../pages/create.match/create.match.page';
 
 import { Home } from '../../../pages/home/home';
 import { Login } from '../../../pages/login/login';
@@ -15,6 +16,10 @@ export function AppRoutes() {
                 element={<MyMatchesPage></MyMatchesPage>}
             ></Route>
             <Route path="Register" element={<Register></Register>}></Route>
+            <Route
+                path="CreateMatchPage"
+                element={<CreateMatchPage></CreateMatchPage>}
+            ></Route>
             <Route path="Login" element={<Login></Login>}></Route>
             <Route path="" element={<Home></Home>}></Route>
         </Routes>

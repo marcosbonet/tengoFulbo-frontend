@@ -21,11 +21,12 @@ export const PlayerReducer = createReducer(initialState, (builder) => {
         player: action.payload.player,
     }));
 
-    builder.addCase(ac.logoutActionCreator, (state) => ({
+    builder.addCase(ac.logoutActionCreator, (state, _action) => ({
         ...state,
-        token: null,
+
         isLogged: false,
         player: null,
+        token: null,
     }));
 
     builder.addCase(ac.updateAddActionCreator, (state, action) => ({

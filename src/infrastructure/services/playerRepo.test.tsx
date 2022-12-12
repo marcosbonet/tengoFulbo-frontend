@@ -107,7 +107,7 @@ describe('given de PlayerRepo', () => {
                 status: 404,
                 statusText: 'error',
             });
-            await service.updatedelete(updatedMock.toString());
+            await service.updatedelete(updatedMock.id);
             expect(fetch).toHaveBeenCalled();
             expect(error).toBeInstanceOf(Error);
         });
