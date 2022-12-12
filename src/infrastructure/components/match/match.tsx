@@ -5,12 +5,11 @@ import { MatchType } from '../../models/match.types';
 
 export function ItemMatch({ item }: { item: MatchType }) {
     const { handleUpdateAddMatch } = useMatch();
-    const { handleUpdateAddPlayer } = usePlayer();
+    const { handleUpdateAddPlayer, player } = usePlayer();
 
     const handleClick = () => {
         console.log(item.id);
         handleUpdateAddMatch(item.id);
-        handleUpdateAddPlayer(item.id);
     };
 
     return (

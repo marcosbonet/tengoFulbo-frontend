@@ -44,7 +44,7 @@ export function CreateMatch() {
             <form onSubmit={handleSubmit}>
                 <div>
                     <input
-                        name="Places"
+                        name="places"
                         type="text"
                         placeholder="Places"
                         value={data.places}

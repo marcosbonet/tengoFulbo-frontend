@@ -3,12 +3,10 @@ import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { MatchType } from '../../infrastructure/models/match.types';
 
 export function MyMatches({ match }: { match: MatchType }) {
-    const { handleUpdateDeleteMatch } = useMatch(match);
     const { handleUpdateDeletePlayer } = usePlayer();
 
     const handleClick = () => {
         handleUpdateDeletePlayer(match);
-        handleUpdateDeleteMatch;
     };
 
     return (
