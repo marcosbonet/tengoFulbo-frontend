@@ -17,7 +17,6 @@ export const useMatch = () => {
             .get()
             .then((response) => {
                 dispatcher(ac.loadActionCreator(response));
-                console.log(response);
             })
             .catch((error: Error) => console.log(error.name, error.message));
     }, [apiMatch, dispatcher]);
@@ -37,7 +36,6 @@ export const useMatch = () => {
         await apiPlayer
             .updateadd(idMatch)
             .then((matchUpdated) => {
-                console.log(matchUpdated);
                 dispatcher(ac.updateAddActionCreator(matchUpdated));
             })
             .catch((error: Error) => console.log(error.name, error.message));

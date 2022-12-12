@@ -1,5 +1,9 @@
-.app {
+.header {
     display: flex;
-    font-size: 2rem;
-    padding: 2rem;
+    justify-content: space-between;
+    background-color: #fcfefd;
+    padding-inline: 2rem;
+}
+.menuNav {
+    display: flex;
 }

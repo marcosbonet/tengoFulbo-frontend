@@ -1,0 +1,45 @@
+.containermatch {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px;
+    background-color: #c5c3c374;
+    border-radius: 40px;
+}
+.matchdescription {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 20px;
+    font-size: 1.3rem;
+    min-height: 40px;
+}
+.matchul {
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    display: flex;
+    list-style: none;
+
+    flex-direction: column;
+}
+.containermatch:hover {
+    background-color: #9898986b;
+    cursor: pointer;
+}
+.matchLi {
+    box-shadow: 13px 13px13px #000;
+    border-radius: 40px;
+}
+.matchImage {
+    display: flex;
+    min-width: 80%;
+    justify-content: space-between;
+    list-style: none;
+}
+.button {
+    background: #92c7eb;
+
+    border-radius: 40px;
+
+    height: 70px;
+
+    cursor: pointer;
+}
