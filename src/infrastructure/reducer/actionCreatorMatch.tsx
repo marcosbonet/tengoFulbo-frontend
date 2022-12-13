@@ -9,7 +9,7 @@ export const createActionCreator = createAction<MatchType>(
 export const loadActionCreator = createAction<Array<MatchType>>(
     actionMatchType.load
 );
-export const updateAddActionCreator = createAction<MatchType>(
+export const updateAddMatchctionCreator = createAction<MatchType>(
     actionMatchType.updateAdd
 );
 export const updateDeleteActionCreator = createAction<MatchType>(

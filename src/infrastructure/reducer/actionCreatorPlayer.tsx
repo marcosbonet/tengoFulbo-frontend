@@ -3,12 +3,14 @@ import { MatchType } from '../models/match.types';
 import { PlayerTypes, PlayerWithToken } from '../models/player.types';
 import { actionPlayerTypes } from './actionTypesPlayer';
 
-export const loginActionCreator = createAction<any>(actionPlayerTypes.login);
-// {player: PlayerTypes;
-// token: string;}
+export const loginActionCreator = createAction<{
+    player: PlayerTypes;
+    token: string;
+}>(actionPlayerTypes.login);
+
 export const logoutActionCreator = createAction<void>(actionPlayerTypes.logout);
 
-export const updateAddActionCreator = createAction<Partial<MatchType>>(
+export const updateAddActionCreator = createAction<MatchType>(
     actionPlayerTypes.updateAdd
 );
 export const updateDeleteActionCreator = createAction<Partial<MatchType>>(

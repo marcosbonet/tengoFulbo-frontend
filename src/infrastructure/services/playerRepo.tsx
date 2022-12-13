@@ -22,7 +22,9 @@ export class PlayerRepo {
                 return error;
             });
     }
-    login(player: ProtoPlayer): Promise<string> {
+    login(
+        player: ProtoPlayer
+    ): Promise<{ token: string; player: PlayerTypes }> {
         const url = URL + 'players/login';
         return fetch(url, {
             method: 'POST',
@@ -34,10 +36,7 @@ export class PlayerRepo {
             .then((res) => {
                 return res.json();
             })
-            .then((res) => {
-                localStorage.setItem('token', res.token);
-                return res.token;
-            })
+
             .catch((error) => {
                 return error;
             });
@@ -59,10 +58,8 @@ export class PlayerRepo {
     }
 
     updateadd(id: string): Promise<MatchType> {
-        console.log('3');
         const url = URL + `players/update/${id}`;
         const token = localStorage.getItem('token');
-        console.log(token, 'mostrar token');
 
         return fetch(url, {
             method: 'PATCH',
@@ -77,10 +74,8 @@ export class PlayerRepo {
             });
     }
     getOne(): Promise<PlayerTypes> {
-        console.log('3');
         const url = URL + `players/getOne`;
         const token = localStorage.getItem('token');
-        console.log(token, 'mostrar token');
 
         return fetch(url, {
             method: 'GET',
@@ -90,6 +85,7 @@ export class PlayerRepo {
             },
         })
             .then((res) => res.json())
+            .then((res) => res.player)
             .catch((error) => {
                 return error;
             });
@@ -102,7 +98,7 @@ export class PlayerRepo {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${localStorage.removeItem('token')}`,
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         })
             .then((res) => res.json())

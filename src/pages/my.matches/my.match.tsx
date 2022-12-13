@@ -5,6 +5,7 @@ export function MyMatches({ match }: { match: MatchType }) {
     const { handleUpdateDeletePlayer } = usePlayer();
 
     const handleClick = () => {
+        console.log(match, 'soy un match');
         handleUpdateDeletePlayer(match);
     };
 

@@ -15,7 +15,7 @@ export const MatchReducer = createReducer(initialState, (builder) => {
         state.filter((item) => item.id !== action.payload.id)
     );
 
-    builder.addCase(ac.updateAddActionCreator, (state, action) =>
+    builder.addCase(ac.updateAddMatchctionCreator, (state, action) =>
         state.map((item) => (item === action.payload ? action.payload : item))
     );
 

@@ -33,8 +33,9 @@ export const useMatch = () => {
         await apiPlayer
             .updateadd(idMatch)
             .then((matchUpdated) => {
-                dispatcher(ac.updateAddActionCreator(matchUpdated));
-                handleLoad()
+                console.log(matchUpdated, 'Que SOY?');
+                dispatcher(ac.updateAddMatchctionCreator(matchUpdated));
+                handleLoad();
             })
             .catch((error: Error) => console.log(error.name, error.message));
     };

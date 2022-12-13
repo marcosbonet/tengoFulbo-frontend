@@ -19,15 +19,12 @@ export function Login() {
         setdata({ ...data, [element.name]: element.value });
     };
 
-    const handleSubmit = async (ev: SyntheticEvent) => {
+    const handleSubmit = (ev: SyntheticEvent) => {
         ev.preventDefault();
 
-        await handleLogin(data)
-            .then((resp) => {
-                console.log(resp);
-                console.log(player.token);
-            })
-            .then(() => navigate('/home'));
+        handleLogin(data);
+
+        navigate('/home');
     };
 
     return (

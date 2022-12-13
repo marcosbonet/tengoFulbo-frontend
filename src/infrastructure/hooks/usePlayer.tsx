@@ -37,7 +37,6 @@ export const usePlayer = () => {
     };
 
     const handleUpdateAddPlayer = async (idMatch: string) => {
-        console.log('3');
         await apiPlayer
             .updateadd(idMatch)
             .then((matchUpdated) =>
@@ -47,6 +46,7 @@ export const usePlayer = () => {
     };
 
     const handleUpdateDeletePlayer = async (idMatch: MatchType) => {
+        console.log(idMatch.id, 'soy un id');
         await apiPlayer
             .updatedelete(idMatch.id)
             .then(() => dispatcher(ac.updateDeleteActionCreator(idMatch)))

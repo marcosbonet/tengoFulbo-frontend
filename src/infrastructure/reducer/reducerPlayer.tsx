@@ -1,9 +1,8 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { isAwaitExpression } from 'typescript';
+
 import { PlayerTypes } from '../models/player.types';
 
 import * as ac from './actionCreatorPlayer';
-import { actionMatchType } from './actionTypesMatch';
 
 const initialState: {
     isLogged: boolean;
