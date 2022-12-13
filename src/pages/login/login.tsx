@@ -21,8 +21,12 @@ export function Login() {
 
     const handleSubmit = async (ev: SyntheticEvent) => {
         ev.preventDefault();
+
         await handleLogin(data)
-            .then(() => localStorage.setItem('token', player.token as string))
+            .then((resp) => {
+                console.log(resp);
+                console.log(player.token);
+            })
             .then(() => navigate('/home'));
     };
 
