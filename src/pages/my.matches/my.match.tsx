@@ -10,7 +10,6 @@ export function MyMatches({ match }: { match: MatchType }) {
 
     return (
         <>
-            {' '}
             <main>
                 <li key={Math.floor(Math.random() * 1000000)}>
                     <img src={match.image} alt=""></img>

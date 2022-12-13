@@ -17,4 +17,5 @@ export const actionPlayerTypes = {
     updateAdd: 'player@updateAdd',
     updateDelete: 'player@updateDelete',
     delete: 'player@delete',
+    getOne: 'player@getOne',
 };

@@ -34,6 +34,7 @@ export const useMatch = () => {
             .updateadd(idMatch)
             .then((matchUpdated) => {
                 dispatcher(ac.updateAddActionCreator(matchUpdated));
+                handleLoad()
             })
             .catch((error: Error) => console.log(error.name, error.message));
     };

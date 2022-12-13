@@ -57,9 +57,10 @@ export class PlayerRepo {
                 return error;
             });
     }
+
     updateadd(id: string): Promise<MatchType> {
         console.log('3');
-        const url = URL + `matches/update/${id}`;
+        const url = URL + `players/update/${id}`;
         const token = localStorage.getItem('token');
         console.log(token, 'mostrar token');
 
@@ -75,9 +76,27 @@ export class PlayerRepo {
                 return error;
             });
     }
+    getOne(): Promise<PlayerTypes> {
+        console.log('3');
+        const url = URL + `players/getOne`;
+        const token = localStorage.getItem('token');
+        console.log(token, 'mostrar token');
+
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+            .then((res) => res.json())
+            .catch((error) => {
+                return error;
+            });
+    }
 
     updatedelete(id: string): Promise<void> {
-        const url = URL + `matches/delete/${id}`;
+        const url = URL + `players/delete/${id}`;
 
         return fetch(url, {
             method: 'PATCH',

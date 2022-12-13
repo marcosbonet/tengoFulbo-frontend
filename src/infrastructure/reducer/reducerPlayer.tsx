@@ -1,7 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
+import { isAwaitExpression } from 'typescript';
 import { PlayerTypes } from '../models/player.types';
 
 import * as ac from './actionCreatorPlayer';
+import { actionMatchType } from './actionTypesMatch';
 
 const initialState: {
     isLogged: boolean;
@@ -44,6 +46,11 @@ export const PlayerReducer = createReducer(initialState, (builder) => {
                 (match) => match.id !== action.payload.id
             ),
         } as PlayerTypes,
+    }));
+
+    builder.addCase(ac.getOneActionCreator, (_state, action) => ({
+        ..._state,
+        player: action.payload,
     }));
 
     builder.addDefaultCase((state) => state);

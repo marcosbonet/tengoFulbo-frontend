@@ -65,9 +65,8 @@ export function CreateMatch() {
                 </div>
                 <div>
                     <input
-                        name="Picture"
-                        type="file"
-                        accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                        name="Insert URL's Picture"
+                        type="text"
                         value={data.image}
                         onInput={handleInput}
                     />
