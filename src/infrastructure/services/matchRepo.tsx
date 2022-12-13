@@ -3,12 +3,6 @@ import { MatchType, ProtoMatch } from '../models/match.types';
 const URL = 'http://localhost:7700/';
 
 export class MatchRepo {
-    createError(response: Response) {
-        const message = `Error ${response.status}: ${response.statusText}`;
-        const error = new Error(message);
-        error.name = 'HTTPError';
-        return error;
-    }
     search(data: { [key: string]: string }): Promise<MatchType> {
         const url = URL + 'matches/:key/:value';
         return fetch(url, {
@@ -20,7 +14,7 @@ export class MatchRepo {
         })
             .then((response) => response.json())
             .catch((error) => {
-                return `${error}`;
+                return error;
             });
     }
     get(): Promise<Array<MatchType>> {

@@ -17,7 +17,10 @@ export const usePlayer = () => {
     const handleLogin = async (data: ProtoPlayer) => {
         await apiPlayer
             .login(data)
-            .then((response) => dispatcher(ac.loginActionCreator(response)))
+            .then((response) => {
+                console.log(response);
+                dispatcher(ac.loginActionCreator(response));
+            })
             .catch((error: Error) => console.log(error.name, error.message));
     };
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMatch } from '../../infrastructure/hooks/useMatch';
 import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { ProtoMatch } from '../../infrastructure/models/match.types';
@@ -10,6 +11,7 @@ type ProtoMatchtypes = {
 };
 
 export function CreateMatch() {
+    const navigate = useNavigate();
     const initialState: ProtoMatchtypes = {
         places: '',
         date: '',
@@ -37,6 +39,7 @@ export function CreateMatch() {
         };
         handleCreateMatch(newMatch);
         handleUpdateAddPlayer(player.player?.playerName as string);
+        navigate('/Home');
     };
     return (
         <>

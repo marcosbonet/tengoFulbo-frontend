@@ -7,6 +7,7 @@ export function MyMatchesPage() {
             <div>
                 <h3>My matches</h3>
                 <MyMatchList />
+                <p>futbol</p>
             </div>
             <DeletePlayer />
         </>

@@ -1,26 +1,28 @@
-export {};
-// import { render, screen } from '@testing-library/react';
-// import { Provider } from 'react-redux';
-// import { MemoryRouter as Router } from 'react-router-dom';
-// import { appStore } from '../../infrastructure/store/store';
+import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { Provider } from 'react-redux';
+import { MemoryRouter as Router } from 'react-router-dom';
 
-// import { MyMatchesPage } from './my.match.page';
+import { mockMatch, mockStore } from '../../mock/mockstore';
+import { MyMatches } from './my.match';
 
-// describe('Given the my match page component', () => {
-//     describe('When we render it', () => {
-//         beforeEach(() => {
-//             render(
-//                 <Provider store={appStore}>
-//                     <Router>
-//                         <MyMatchesPage></MyMatchesPage>
-//                     </Router>
-//                 </Provider>
-//             );
-//         });
-//         test('Then it should appear the "My matches" header', () => {
-//             expect(
-//                 screen.getByRole('heading', { name: /You Don't have Matches on your list/i })
-//             ).toBeInTheDocument();
-//         });
-//     });
-// });
+import { MyMatchesPage } from './my.match.page';
+
+describe('Given the my match page component', () => {
+    describe('When we render it', () => {
+        beforeEach(() => {
+            render(
+                <Router>
+                    <Provider store={mockStore}>
+                        <MyMatches match={mockMatch} />
+                    </Provider>
+                </Router>
+            );
+        });
+        test('Then it should appear the "My matches" header', async () => {
+            const element = screen.getByText(/river/i);
+            expect(element).toBeInTheDocument();
+            userEvent.click(await screen.findByPlaceholderText(/basura/i));
+        });
+    });
+});

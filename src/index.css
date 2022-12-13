@@ -7,8 +7,5 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
-}
-main {
-    min-height: 70vh;
-    padding: 1rem;
+    position: absolute;
 }

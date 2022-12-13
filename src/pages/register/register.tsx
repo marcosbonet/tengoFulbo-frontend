@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ProtoPlayer } from '../../infrastructure/models/player.types';
 import { PlayerRepo } from '../../infrastructure/services/playerRepo';
 
 export function Register() {
+    const navigate = useNavigate();
     const initialState: ProtoPlayer = {
         playerName: '',
         password: '',
@@ -19,6 +21,7 @@ export function Register() {
     const handleSubmit = async (ev: React.SyntheticEvent) => {
         ev.preventDefault();
         await player.register(data);
+        navigate('/login');
     };
     return (
         <>

@@ -12,6 +12,7 @@ export const useMatch = () => {
     const dispatcher = useDispatch();
     const apiMatch = useMemo(() => new MatchRepo(), []);
     const apiPlayer = useMemo(() => new PlayerRepo(), []);
+
     const handleLoad = useCallback(() => {
         apiMatch
             .get()
@@ -20,10 +21,6 @@ export const useMatch = () => {
             })
             .catch((error: Error) => console.log(error.name, error.message));
     }, [apiMatch, dispatcher]);
-
-    useEffect(() => {
-        handleLoad();
-    }, [handleLoad]);
 
     const handleCreateMatch = (newMatch: ProtoMatch) => {
         apiMatch

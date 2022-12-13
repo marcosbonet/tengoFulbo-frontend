@@ -1,4 +1,3 @@
-import { useMatch } from 'react-router-dom';
 import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { MatchType } from '../../infrastructure/models/match.types';
 
@@ -18,7 +17,11 @@ export function MyMatches({ match }: { match: MatchType }) {
                     <p>{match.date}</p>
                     <p>{match.places}</p>
 
-                    <button className="button" onClick={handleClick}>
+                    <button
+                        className="button"
+                        onClick={handleClick}
+                        placeholder="basura"
+                    >
                         🗑️
                     </button>
                 </li>

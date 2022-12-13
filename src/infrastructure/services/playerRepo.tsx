@@ -22,7 +22,7 @@ export class PlayerRepo {
                 return error;
             });
     }
-    login(player: ProtoPlayer): Promise<PlayerWithToken> {
+    login(player: ProtoPlayer): Promise<string> {
         const url = URL + 'players/login';
         return fetch(url, {
             method: 'POST',
@@ -31,7 +31,13 @@ export class PlayerRepo {
                 'Content-Type': 'application/json',
             },
         })
-            .then((res) => res.json())
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                localStorage.setItem('token', res.token);
+                return res.token;
+            })
             .catch((error) => {
                 return error;
             });
