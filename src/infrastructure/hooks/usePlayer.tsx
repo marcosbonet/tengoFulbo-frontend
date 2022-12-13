@@ -52,6 +52,7 @@ export const usePlayer = () => {
             .then(() => dispatcher(ac.updateDeleteActionCreator(idMatch)))
             .catch((error: Error) => console.log(error.name, error.message));
     };
+
     const handleGetOne = async () => {
         await apiPlayer
             .getOne()
