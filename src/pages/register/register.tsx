@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ProtoPlayer } from '../../infrastructure/models/player.types';
 import { PlayerRepo } from '../../infrastructure/services/playerRepo';
-
+import style from './register.module.css';
 export function Register() {
     const navigate = useNavigate();
     const initialState: ProtoPlayer = {
@@ -25,38 +25,46 @@ export function Register() {
     };
     return (
         <>
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        name="playerName"
-                        type="text"
-                        placeholder="Name"
-                        value={data.playerName}
-                        onInput={handleInput}
-                    />
-                </div>
-                <div>
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="password"
-                        value={data.password}
-                        onInput={handleInput}
-                    />
-                </div>
-                <div>
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="email"
-                        value={data.email}
-                        onInput={handleInput}
-                    />
-                </div>
+            {' '}
+            <div className={`${style.container} ${style.fadeInRight}`}>
+                <h2 className={style.form__tittle}>Register</h2>
+                <form onSubmit={handleSubmit} className={style.form}>
+                    <div>
+                        <input
+                            name="playerName"
+                            type="text"
+                            placeholder="Name"
+                            value={data.playerName}
+                            onInput={handleInput}
+                            className={style.form__input}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="password"
+                            value={data.password}
+                            onInput={handleInput}
+                            className={style.form__input}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            name="email"
+                            type="email"
+                            placeholder="email"
+                            value={data.email}
+                            onInput={handleInput}
+                            className={style.form__input}
+                        />
+                    </div>
 
-                <button type="submit">Register</button>
-            </form>
+                    <button type="submit" className={style.btn}>
+                        Register
+                    </button>
+                </form>
+            </div>
         </>
     );
 }

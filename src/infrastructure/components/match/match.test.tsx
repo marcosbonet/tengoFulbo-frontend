@@ -15,9 +15,9 @@ describe('Given matchList component', () => {
         test('then it should display the Gifs List', async () => {
             const mockMatchList: MatchType = {
                 places: 'test',
-                id: ``,
-                date: '',
-                image: '',
+                id: `12`,
+                date: '12',
+                image: '12',
             };
 
             render(
@@ -33,7 +33,7 @@ describe('Given matchList component', () => {
             );
             const element = await screen.findByText(/test/i);
             expect(element).toBeInTheDocument();
-            userEvent.click(await screen.findByText(/test/i));
+            userEvent.click(screen.getByText(/Add match/i));
         });
     });
 });

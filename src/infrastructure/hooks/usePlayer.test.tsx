@@ -10,7 +10,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { rootState } from '../store/store';
 import { MatchReducer } from '../reducer/reducerMatch';
 import { mockStore } from '../../mock/mockstore';
-jest.mock('../services/PlayerRepo');
+jest.mock('../services/playerRepo');
 
 const mockPlayer: PlayerTypes = {
     id: '1234',
@@ -65,7 +65,7 @@ let result: {
         handleDelete: (player: PlayerTypes) => Promise<void>;
         handleUpdateAddPlayer: (idMatch: string) => Promise<void>;
         handleUpdateDeletePlayer: (idMatch: MatchType) => Promise<void>;
-        handleGetOne: () => Promise<void>;
+        handleGetOne: () => void;
     };
 };
 

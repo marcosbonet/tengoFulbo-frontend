@@ -55,7 +55,6 @@ export class PlayerRepo {
 
     updateadd(id: string): Promise<MatchType> {
         const url = URL + `players/update/${id}`;
-        localStorage.getItem('token');
 
         return fetch(url, {
             method: 'PATCH',
@@ -71,7 +70,6 @@ export class PlayerRepo {
     }
     getOne(): Promise<PlayerTypes> {
         const url = URL + `players/getOne`;
-        localStorage.getItem('token');
 
         return fetch(url, {
             method: 'GET',

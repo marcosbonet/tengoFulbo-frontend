@@ -1,5 +1,6 @@
 import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { MatchType } from '../../infrastructure/models/match.types';
+import style from './my.match.module.css';
 
 export function MyMatches({ match }: { match: MatchType }) {
     const { handleUpdateDeletePlayer } = usePlayer();
@@ -11,17 +12,26 @@ export function MyMatches({ match }: { match: MatchType }) {
     return (
         <>
             <main>
-                <li key={Math.floor(Math.random() * 1000000)}>
-                    <img src={match.image} alt=""></img>
-                    <p>{match.date}</p>
-                    <p>{match.places}</p>
+                <li
+                    key={Math.floor(Math.random() * 1000000)}
+                    className={style.li}
+                >
+                    <div className={style.dic_img}>
+                        <img
+                            className={style.img}
+                            src={match.image}
+                            alt=""
+                        ></img>
+                    </div>
+                    <p className={style.form__input}>{match.date}</p>
+                    <p className={style.form__input}>{match.places}</p>
 
                     <button
-                        className="button"
+                        className={style.btn}
                         onClick={handleClick}
                         placeholder="basura"
                     >
-                        🗑️
+                        Delete match
                     </button>
                 </li>
             </main>

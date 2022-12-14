@@ -11,7 +11,7 @@
     padding-top: 100px;
 }
 .form__tittle {
-    color: rgb(255, 253, 253);
+    color: rgb(255, 244, 244);
     font: bold;
     text-align: center;
     font-size: 1.5rem;
@@ -53,7 +53,6 @@
     color: rgb(94, 92, 92);
     font-size: 0.7rem;
     gap: 10px;
-    margin-bottom: 117px;
 }
 .form__info--or {
     display: flex;
@@ -89,7 +88,7 @@
 
     width: 343px;
     height: 65px;
-    margin-bottom: 15px;
+    margin-bottom: 124px;
 }
 
 .btn:hover {
@@ -100,20 +99,19 @@
     color: #0066cc;
     border: solid 2px #0066cc;
 }
-
-.fadeInLeft {
-    -webkit-animation-name: fadeInLeft;
-    animation-name: fadeInLeft;
+.fadeInRight {
+    -webkit-animation-name: fadeInRight;
+    animation-name: fadeInRight;
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
-@-webkit-keyframes fadeInLeft {
+@-webkit-keyframes fadeInRight {
     0% {
         opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
     }
     100% {
         opacity: 1;
@@ -121,11 +119,11 @@
         transform: none;
     }
 }
-@keyframes fadeInLeft {
+@keyframes fadeInRight {
     0% {
         opacity: 0;
-        -webkit-transform: translate3d(-100%, 0, 0);
-        transform: translate3d(-100%, 0, 0);
+        -webkit-transform: translate3d(100%, 0, 0);
+        transform: translate3d(100%, 0, 0);
     }
     100% {
         opacity: 1;

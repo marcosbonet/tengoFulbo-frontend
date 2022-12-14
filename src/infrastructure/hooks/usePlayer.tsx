@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { rootState } from '../store/store';
@@ -17,6 +17,7 @@ export const usePlayer = () => {
     const handleLogin = async (data: ProtoPlayer) => {
         await apiPlayer.login(data).then((response) => {
             dispatcher(ac.loginActionCreator(response));
+            localStorage.setItem('token', response.token);
         });
     };
 
@@ -44,16 +45,18 @@ export const usePlayer = () => {
     const handleUpdateDeletePlayer = async (idMatch: MatchType) => {
         await apiPlayer
             .updatedelete(idMatch.id)
-            .then(() => dispatcher(ac.updateDeleteActionCreator(idMatch)))
+            .then((res) => {
+                dispatcher(ac.updateDeleteActionCreator(idMatch));
+                console.log(res);
+            })
             .catch((error: Error) => console.log(error.name, error.message));
     };
 
-    const handleGetOne = async () => {
-        await apiPlayer
+    const handleGetOne = useCallback(() => {
+        apiPlayer
             .getOne()
             .then((player) => dispatcher(ac.getOneActionCreator(player)));
-    };
-
+    }, [apiPlayer, dispatcher]);
     return {
         player,
         handleLogin,

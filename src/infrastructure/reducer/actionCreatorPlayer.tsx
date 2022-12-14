@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { MatchType } from '../models/match.types';
-import { PlayerTypes, PlayerWithToken } from '../models/player.types';
+import { PlayerTypes } from '../models/player.types';
 import { actionPlayerTypes } from './actionTypesPlayer';
 
 export const loginActionCreator = createAction<{

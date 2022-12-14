@@ -14,17 +14,22 @@ export function ItemMatch({ item }: { item: MatchType }) {
 
     return (
         <>
-            <li className={Styles.containermatch}>
-                <img
-                    className={Styles.matchimage}
-                    src={item.image}
-                    alt=""
-                ></img>
+            <li className={`${Styles.containermatch} ${Styles.flipInX}`}>
+                <div>
+                    <img
+                        className={Styles.matchimage}
+                        src={item.image}
+                        alt=""
+                    ></img>
+                </div>
                 <div className={Styles.matchdescription}>
                     <p>{item.date}</p>
                     <p>{item.places}</p>
                 </div>
-                <button onClick={handleClick}>Add match</button>
+
+                <button onClick={handleClick} className={Styles.btn}>
+                    Add match
+                </button>
             </li>
         </>
     );

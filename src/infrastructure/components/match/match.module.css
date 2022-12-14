@@ -1,13 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
+
 .containermatch {
     display: flex;
     flex-direction: column;
-    box-shadow: 5px;
+    justify-content: center;
+    align-items: center;
+
     background-color: #c5c3c374;
     border-radius: 40px;
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.208);
 }
 .matchdescription {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
     padding-inline: 20px;
     font-size: 1.3rem;
     min-height: 40px;
@@ -17,15 +24,15 @@
     border-top-right-radius: 40px;
     display: flex;
     list-style: none;
-
     flex-direction: column;
+    margin: 20px auto;
 }
 .containermatch:hover {
     background-color: #9898986b;
     cursor: pointer;
 }
 .matchLi {
-    box-shadow: 13px 13px13px #000;
+    box-shadow: 13px 13px 13px #000;
     border-radius: 40px;
 }
 .matchImage {
@@ -42,4 +49,38 @@
     height: 70px;
 
     cursor: pointer;
+}
+
+ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
+}
+.btn {
+    font-family: Roboto, sans-serif;
+    font-weight: 0;
+    font-size: 14px;
+    color: #fff;
+    background-color: #205e2a;
+    padding: 5px 15px;
+    border: solid #205e2a 2px;
+    box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+    border-radius: 50px;
+    transition: 1000ms;
+    transform: translateY(0);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.btn:hover {
+    transition: 1000ms;
+    padding: 10px 50px;
+    transform: translateY(-0px);
+    background-color: #fff;
+    color: #0066cc;
+    border: solid 2px #0066cc;
 }

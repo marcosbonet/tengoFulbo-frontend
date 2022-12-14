@@ -5,21 +5,18 @@ import styles from './header.module.css';
 export function Header() {
     return (
         <header>
-            <div className={styles.header}>
+            <div className={styles.headerList}>
                 <div>
-                    <a href="/">
-                        <Link to="Home">
-                            <img
-                                src={'./assets/lionel-messi.jpg'}
-                                alt="Messi"
-                                width="50px"
-                            />
-                        </Link>
-                    </a>
+                    <Link to="Home">
+                        <img
+                            src={'./assets/messilogo.png'}
+                            alt="Messi"
+                            width="50px"
+                            className={styles.messi}
+                        />
+                    </Link>
                 </div>
-                <div className={styles.menuNav}>
-                    <Menu />
-                </div>
+                <Menu />
             </div>
         </header>
     );

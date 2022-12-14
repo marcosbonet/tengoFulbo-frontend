@@ -47,8 +47,8 @@ export const PlayerReducer = createReducer(initialState, (builder) => {
         } as PlayerTypes,
     }));
 
-    builder.addCase(ac.getOneActionCreator, (_state, action) => ({
-        ..._state,
+    builder.addCase(ac.getOneActionCreator, (state, action) => ({
+        ...state,
         player: action.payload,
     }));
 

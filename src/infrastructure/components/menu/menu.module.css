@@ -1,20 +1,10 @@
-.nav {
+.menuList {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin-inline-end: 1.5rem;
+    flex-direction: row;
+    margin-right: 10px;
 }
-.ul {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    align-content: center;
-    margin-inline-end: 1.5rem;
-    list-style: none;
-}
-
 .link {
     text-decoration: none;
-    color: black;
-    margin: 1rem;
 }

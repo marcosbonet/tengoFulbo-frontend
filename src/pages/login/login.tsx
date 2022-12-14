@@ -28,43 +28,47 @@ export function Login() {
 
     return (
         <>
-            <h2 className="tittle">Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        name="playerName"
-                        type="text"
-                        placeholder="Name"
-                        value={data.playerName}
-                        onInput={handleInput}
-                    />
-                </div>
-                <div>
-                    <input
-                        name="password"
-                        type="password"
-                        placeholder="password"
-                        value={data.password}
-                        onInput={handleInput}
-                    />
-                </div>
+            {' '}
+            <div className={`${style.container} ${style.fadeInLeft}`}>
+                <h2 className={style.form__tittle}>Login</h2>
+                <form onSubmit={handleSubmit} className={style.form}>
+                    <div>
+                        <input
+                            name="playerName"
+                            type="text"
+                            placeholder="Name"
+                            value={data.playerName}
+                            onInput={handleInput}
+                            className={style.form__input}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="password"
+                            value={data.password}
+                            onInput={handleInput}
+                            className={style.form__input}
+                        />
+                    </div>
 
-                <button
-                    name="login"
-                    type="submit"
-                    className={style['form__input--submit']}
-                >
-                    Login
-                </button>
-            </form>
-            <div className={style.form__info}>
-                <p className={style['form__info--or']}>or</p>
-                <p>
-                    don't have an account?{' '}
-                    <Link to="/register" className={style.form__loginButton}>
-                        register
-                    </Link>
-                </p>
+                    <button name="login" type="submit" className={style.btn}>
+                        Login
+                    </button>
+                </form>
+                <div className={style.form__info}>
+                    <p className={style['form__info--or']}>or</p>
+                    <p>
+                        don't have an account?{' '}
+                        <Link
+                            to="/register"
+                            className={style.form__loginButton}
+                        >
+                            register
+                        </Link>
+                    </p>
+                </div>
             </div>
         </>
     );
