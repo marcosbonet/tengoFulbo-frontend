@@ -25,7 +25,7 @@ describe('Given MatchRepo', () => {
                 ok: true,
                 json: jest.fn().mockResolvedValue([matchMock]),
             });
-            const result = await service.get();
+            await service.get();
             expect(fetch).toHaveBeenCalled();
         });
 

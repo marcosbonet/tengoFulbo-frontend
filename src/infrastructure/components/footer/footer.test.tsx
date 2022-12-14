@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import styles from './footer.module.css';
 import { MemoryRouter as Router } from 'react-router-dom';
 import React from 'react';
@@ -17,9 +17,6 @@ describe('When using the footer component', () => {
                     </React.StrictMode>
                 </>
             );
-            // expect(
-            //     screen.getByAltText('Contact by Linkedin')
-            // ).toBeInTheDocument();
         });
     });
 });

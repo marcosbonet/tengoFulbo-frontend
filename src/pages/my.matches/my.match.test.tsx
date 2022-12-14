@@ -1,12 +1,10 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { MemoryRouter as Router } from 'react-router-dom';
 
 import { mockMatch, mockStore } from '../../mock/mockstore';
 import { MyMatches } from './my.match';
-
-import { MyMatchesPage } from './my.match.page';
 
 describe('Given the my match page component', () => {
     describe('When we render it', () => {

@@ -19,9 +19,8 @@ describe('Given the fav page component', () => {
             );
         });
         test('Then it should appear the "home page" header', () => {
-            // expect(
-            //    screen.getByRole('heading', { name: /Tengo fulbo/i })
-            // -).toBeInTheDocument();
+            const element = screen.getByText(/futbol/i);
+            expect(element).toBeInTheDocument();
         });
     });
 });
