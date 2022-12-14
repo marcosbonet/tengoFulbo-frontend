@@ -53,11 +53,7 @@ export function Login() {
                         />
                     </div>
 
-                    <button
-                        name="login"
-                        type="submit"
-                        className={style.form__loginButton}
-                    >
+                    <button name="login" type="submit" className={style.btn}>
                         Login
                     </button>
                 </form>

@@ -60,7 +60,7 @@ export function Register() {
                         />
                     </div>
 
-                    <button type="submit" className={style.form__loginButton}>
+                    <button type="submit" className={style.btn}>
                         Register
                     </button>
                 </form>
