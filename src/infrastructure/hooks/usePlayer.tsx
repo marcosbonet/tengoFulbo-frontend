@@ -7,42 +7,51 @@ import * as ac from '../reducer/actionCreatorPlayer';
 import { PlayerRepo } from '../services/playerRepo';
 import { PlayerTypes, ProtoPlayer } from '../models/player.types';
 
-import { MatchRepo } from '../services/matchRepo';
+import { MatchType } from '../models/match.types';
 
 export const usePlayer = () => {
     const player = useSelector((state: rootState) => state.player);
     const dispatcher = useDispatch();
     const apiPlayer = useMemo(() => new PlayerRepo(), []);
-    const apiMatch = useMemo(() => new MatchRepo(), []);
 
-    const handleLogin = (data: ProtoPlayer) =>
-        apiPlayer
-            .login(data)
-            .then((response) => dispatcher(ac.loginActionCreator(response)))
-            .catch((error: Error) => console.log(error.name, error.message));
+    const handleLogin = async (data: ProtoPlayer) => {
+        await apiPlayer.login(data).then((response) => {
+            dispatcher(ac.loginActionCreator(response));
+        });
+    };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         dispatcher(ac.logoutActionCreator());
         localStorage.clear();
     };
-    const handleDelete = (player: PlayerTypes) => {
-        apiPlayer
-            .delete(player.id)
+    const handleDelete = async (player: PlayerTypes) => {
+        await apiPlayer
+            .delete()
+            .then(() => dispatcher(ac.deleteActionCreator(player)))
             .then(() => dispatcher(ac.logoutActionCreator()));
         localStorage.clear();
     };
 
-    const handleUpdateAddMatch = (updateMatch: PlayerTypes) => {
-        apiMatch
-            .updateadd(updateMatch.id)
-            .then(() => dispatcher(ac.updateAddActionCreator(updateMatch)))
+    const handleUpdateAddPlayer = async (idMatch: string) => {
+        await apiPlayer
+            .updateadd(idMatch)
+            .then((matchUpdated) =>
+                dispatcher(ac.updateAddActionCreator(matchUpdated))
+            )
             .catch((error: Error) => console.log(error.name, error.message));
     };
-    const handleUpdateDeleteMatch = (updateMatch: PlayerTypes) => {
-        apiMatch
-            .updateadd(updateMatch.id)
-            .then(() => dispatcher(ac.updateDeleteActionCreator(updateMatch)))
+
+    const handleUpdateDeletePlayer = async (idMatch: MatchType) => {
+        await apiPlayer
+            .updatedelete(idMatch.id)
+            .then(() => dispatcher(ac.updateDeleteActionCreator(idMatch)))
             .catch((error: Error) => console.log(error.name, error.message));
+    };
+
+    const handleGetOne = async () => {
+        await apiPlayer
+            .getOne()
+            .then((player) => dispatcher(ac.getOneActionCreator(player)));
     };
 
     return {
@@ -50,7 +59,8 @@ export const usePlayer = () => {
         handleLogin,
         handleLogout,
         handleDelete,
-        handleUpdateAddMatch,
-        handleUpdateDeleteMatch,
+        handleGetOne,
+        handleUpdateAddPlayer,
+        handleUpdateDeletePlayer,
     };
 };

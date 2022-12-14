@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { SyntheticEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { ProtoPlayer } from '../../infrastructure/models/player.types';
-import { PlayerRepo } from '../../infrastructure/services/playerRepo';
+import style from './login.module.css';
 
 export function Login() {
     const initialState: ProtoPlayer = {
@@ -8,26 +11,24 @@ export function Login() {
         password: '',
         email: '',
     };
-    const [data, setdata] = useState(initialState);
-    const player = new PlayerRepo();
 
-    const handleInput = (ev: React.SyntheticEvent) => {
+    const { handleLogin } = usePlayer();
+    const [data, setdata] = useState(initialState);
+
+    const handleInput = (ev: SyntheticEvent) => {
         const element = ev.target as HTMLFormElement;
         setdata({ ...data, [element.name]: element.value });
     };
 
-    const handleSubmit = async (ev: React.SyntheticEvent) => {
+    const handleSubmit = (ev: SyntheticEvent) => {
         ev.preventDefault();
-        const token = await player.login(data);
-        localStorage.setItem('token', token);
+
+        handleLogin(data);
     };
-    // if (!localStorage.getItem('token')) {
-    //     return <div> This player is not register</div>;
-    // }
 
     return (
         <>
-            <h2>Tengo Fulbo</h2>
+            <h2 className="tittle">Login</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <input
@@ -47,17 +48,24 @@ export function Login() {
                         onInput={handleInput}
                     />
                 </div>
-                <div>
-                    <input
-                        name="email"
-                        type="email"
-                        placeholder="email"
-                        value={data.email}
-                        onInput={handleInput}
-                    />
-                </div>
-                <button type="submit">Login</button>
+
+                <button
+                    name="login"
+                    type="submit"
+                    className={style['form__input--submit']}
+                >
+                    Login
+                </button>
             </form>
+            <div className={style.form__info}>
+                <p className={style['form__info--or']}>or</p>
+                <p>
+                    don't have an account?{' '}
+                    <Link to="/register" className={style.form__loginButton}>
+                        register
+                    </Link>
+                </p>
+            </div>
         </>
     );
 }

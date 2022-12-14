@@ -1,19 +1,9 @@
-import { MatchTypes } from '../models/match.types';
-import {
-    PlayerTypes,
-    PlayerWithToken,
-    ProtoPlayer,
-} from '../models/player.types';
+import { MatchType } from '../models/match.types';
+import { PlayerTypes, ProtoPlayer } from '../models/player.types';
 
 const URL = 'http://localhost:7700/';
 
 export class PlayerRepo {
-    createError(response: Response) {
-        const message = `Error ${response.status}: ${response.statusText}`;
-        const error = new Error(message);
-        error.name = 'HTTPError';
-        return error;
-    }
     register(player: ProtoPlayer): Promise<PlayerTypes> {
         const url = URL + 'players/register';
         return fetch(url, {
@@ -23,12 +13,14 @@ export class PlayerRepo {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => response.json())
+            .then((res) => res.json())
             .catch((error) => {
-                return `${error}`;
+                return error;
             });
     }
-    login(player: ProtoPlayer): Promise<PlayerWithToken> {
+    login(
+        player: ProtoPlayer
+    ): Promise<{ token: string; player: PlayerTypes }> {
         const url = URL + 'players/login';
         return fetch(url, {
             method: 'POST',
@@ -37,14 +29,16 @@ export class PlayerRepo {
                 'Content-Type': 'application/json',
             },
         })
-            .then((response) => response.json())
+            .then((res) => {
+                return res.json();
+            })
 
             .catch((error) => {
-                return `${error}`;
+                return error;
             });
     }
-    delete(id: string): Promise<{ id: string }> {
-        const url = URL + `players/${id}`;
+    delete(): Promise<void> {
+        const url = URL + 'players/delete';
 
         return fetch(url, {
             method: 'DELETE',
@@ -53,33 +47,48 @@ export class PlayerRepo {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         })
-            .then((response) => response.json())
+            .then((res) => res.json())
             .catch((error) => {
-                return `${error}`;
+                return error;
             });
     }
-    updateadd(
-        id: string,
-        ProtoMatch: Partial<MatchTypes>
-    ): Promise<MatchTypes> {
-        const url = URL + `matches/update/${id}`;
+
+    updateadd(id: string): Promise<MatchType> {
+        const url = URL + `players/update/${id}`;
+        localStorage.getItem('token');
 
         return fetch(url, {
             method: 'PATCH',
-            body: JSON.stringify(ProtoMatch),
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         })
-            .then((response) => response.json())
+            .then((res) => res.json())
             .catch((error) => {
-                return `${error}`;
+                return error;
+            });
+    }
+    getOne(): Promise<PlayerTypes> {
+        const url = URL + `players/getOne`;
+        localStorage.getItem('token');
+
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((res) => res.player)
+            .catch((error) => {
+                return error;
             });
     }
 
     updatedelete(id: string): Promise<void> {
-        const url = URL + `matches/delete/${id}`;
+        const url = URL + `players/delete/${id}`;
 
         return fetch(url, {
             method: 'PATCH',
@@ -88,9 +97,9 @@ export class PlayerRepo {
                 Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         })
-            .then((response) => response.json())
+            .then((res) => res.json())
             .catch((error) => {
-                return `${error}`;
+                return error;
             });
     }
 }

@@ -1,6 +1,5 @@
-import { MatchTypes } from '../models/match.types';
+import { MatchType } from '../models/match.types';
 import { PlayerTypes } from '../models/player.types';
-import { MatchRepo } from './matchRepo';
 
 import { PlayerRepo } from './playerRepo';
 
@@ -11,28 +10,27 @@ const mockPlayer: PlayerTypes = {
     id: '5432',
     matches: [],
 };
-const matchMock: MatchTypes = {
+const matchMock: MatchType = {
     id: '',
-    place: '',
+    places: '',
     date: '',
     image: '',
     players: [],
 };
 
-const updatedMock: MatchTypes = {
+const updatedMock: MatchType = {
     id: 'test',
-    place: '123',
+    places: '123',
     date: '123',
     image: '123',
     players: [],
 };
 describe('given de PlayerRepo', () => {
     let service: PlayerRepo;
-    let serviceMatch: MatchRepo;
+
     const error = new Error('Error');
     beforeEach(() => {
         service = new PlayerRepo();
-        serviceMatch = new MatchRepo();
     });
     describe('When we intantiate Register', () => {
         test('then it should return a new player', async () => {
@@ -78,7 +76,7 @@ describe('given de PlayerRepo', () => {
                 ok: true,
                 json: jest.fn().mockResolvedValue(mockPlayer),
             });
-            const result = await service.delete(mockPlayer.id);
+            const result = await service.delete();
             expect(fetch).toHaveBeenCalled();
             expect(result).toBe(mockPlayer);
         });
@@ -87,12 +85,12 @@ describe('given de PlayerRepo', () => {
         global.fetch = jest
             .fn()
             .mockResolvedValue({ ok: false, status: 404, statusText: 'Error' });
-        await service.delete(mockPlayer.id);
+        await service.delete();
         expect(fetch).toHaveBeenCalled();
         expect(error).toBeInstanceOf(Error);
     });
     describe('When we instantiate UPDATEDELETE()', () => {
-        test('Then it should add a users favorite place', async () => {
+        test('Then it should add a users favorite places', async () => {
             global.fetch = jest.fn().mockResolvedValue({
                 ok: true,
                 json: jest.fn().mockResolvedValue(matchMock),
@@ -109,21 +107,19 @@ describe('given de PlayerRepo', () => {
                 status: 404,
                 statusText: 'error',
             });
-            await service.updatedelete(updatedMock.toString());
+            await service.updatedelete(updatedMock.id);
             expect(fetch).toHaveBeenCalled();
             expect(error).toBeInstanceOf(Error);
         });
     });
     describe('When we instantiate UPDATEADD(),', () => {
-        test('Then it should add a users favorite place', async () => {
+        test('Then it should add a users favorite places', async () => {
             global.fetch = jest.fn().mockResolvedValue({
                 ok: true,
                 json: jest.fn().mockResolvedValue(matchMock),
             });
 
-            const result = await service.updateadd(updatedMock.id, {
-                players: matchMock.players,
-            });
+            const result = await service.updateadd(updatedMock.id);
             expect(fetch).toHaveBeenCalled();
             expect(result).toEqual(matchMock);
         });
@@ -134,11 +130,28 @@ describe('given de PlayerRepo', () => {
                 status: 404,
                 statusText: 'error',
             });
-            await service.updateadd(updatedMock.id, {
-                players: matchMock.players,
-            });
+            await service.updateadd(updatedMock.id);
             expect(fetch).toHaveBeenCalled();
             expect(error).toBeInstanceOf(Error);
         });
+    });
+
+    test('Then the getOne must return a player', async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            ok: true,
+            json: jest.fn().mockResolvedValue(mockPlayer),
+        });
+        await service.getOne();
+        expect(fetch).toHaveBeenCalled();
+    });
+    test('Then if something goes wrong, it should throw an ERROR', async () => {
+        global.fetch = jest.fn().mockRejectedValue({
+            ok: false,
+            status: 404,
+            statusText: 'error',
+        });
+        await service.getOne();
+        expect(fetch).toHaveBeenCalled();
+        expect(error).toBeInstanceOf(Error);
     });
 });

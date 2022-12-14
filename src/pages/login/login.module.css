@@ -1,0 +1,12 @@
+.login__error {
+    margin: 20px auto;
+    color: #ffffff;
+    width: 350px;
+    height: 42px;
+    background-color: #db37376d;
+    border-radius: 10px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

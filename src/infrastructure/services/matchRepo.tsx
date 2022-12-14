@@ -1,16 +1,9 @@
-import { MatchTypes, ProtoMatch } from '../models/match.types';
-import { PlayerTypes } from '../models/player.types';
+import { MatchType, ProtoMatch } from '../models/match.types';
 
 const URL = 'http://localhost:7700/';
 
 export class MatchRepo {
-    createError(response: Response) {
-        const message = `Error ${response.status}: ${response.statusText}`;
-        const error = new Error(message);
-        error.name = 'HTTPError';
-        return error;
-    }
-    search(data: { [key: string]: string }): Promise<MatchTypes> {
+    search(data: { [key: string]: string }): Promise<MatchType> {
         const url = URL + 'matches/:key/:value';
         return fetch(url, {
             method: 'SEARCH',
@@ -21,19 +14,25 @@ export class MatchRepo {
         })
             .then((response) => response.json())
             .catch((error) => {
-                return `${error}`;
+                return error;
             });
     }
-    get(): Promise<Array<MatchTypes>> {
+    get(): Promise<Array<MatchType>> {
         const url = URL + 'matches/';
-        return fetch(url).then((response) => {
-            if (response.ok)
-                return response.json().catch((error) => {
-                    return `${error}`;
-                });
-        });
+        return fetch(url, {
+            method: 'GET',
+        })
+            .then((res) => {
+                return res.json();
+            })
+            .then((res) => {
+                return res.match;
+            })
+            .catch((error) => {
+                return error;
+            });
     }
-    create(item: Partial<ProtoMatch>): Promise<MatchTypes> {
+    create(item: Partial<ProtoMatch>): Promise<MatchType> {
         const url = URL + 'matches/';
         return fetch(url, {
             method: 'POST',

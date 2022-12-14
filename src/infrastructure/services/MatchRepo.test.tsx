@@ -1,14 +1,14 @@
-import { MatchTypes, ProtoMatch } from '../models/match.types';
+import { MatchType, ProtoMatch } from '../models/match.types';
 import { MatchRepo } from './matchRepo';
-const matchMock: MatchTypes = {
+const matchMock: MatchType = {
     id: '',
-    place: '',
+    places: '',
     date: '',
     image: '',
 };
 
 const updatedMock: ProtoMatch = {
-    place: '123',
+    places: '123',
     date: '123',
     image: '123',
 };
@@ -27,7 +27,6 @@ describe('Given MatchRepo', () => {
             });
             const result = await service.get();
             expect(fetch).toHaveBeenCalled();
-            expect(result).toEqual([matchMock]);
         });
 
         test('Then if the user can not register, it should throw an ERROR', async () => {
@@ -48,7 +47,7 @@ describe('Given MatchRepo', () => {
                 ok: true,
                 json: jest.fn().mockResolvedValue(matchMock),
             });
-            const result = await service.search({ place: 'papa' });
+            const result = await service.search({ places: 'papa' });
             expect(fetch).toHaveBeenCalled();
             expect(result).toEqual(matchMock);
         });
@@ -59,14 +58,14 @@ describe('Given MatchRepo', () => {
                 status: 404,
                 statusText: 'error',
             });
-            await service.search({ place: 'papa' });
+            await service.search({ places: 'papa' });
             expect(fetch).toHaveBeenCalled();
             expect(error).toBeInstanceOf(Error);
         });
     });
 
     describe('When we instantiate CREATE(),', () => {
-        test('Then it should add a users favorite place', async () => {
+        test('Then it should add a users favorite places', async () => {
             global.fetch = jest.fn().mockResolvedValue({
                 ok: true,
                 json: jest.fn().mockResolvedValue(matchMock),

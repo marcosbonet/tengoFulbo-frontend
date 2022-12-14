@@ -1,16 +1,16 @@
-import { MatchTypes } from './match.types';
+import { MatchType } from './match.types';
 
 export type PlayerTypes = {
     id: string;
     playerName: string;
     password: string;
     email: string;
-    matches: Array<MatchTypes>;
+    matches: Array<MatchType>;
 };
 
 export type PlayerWithToken = {
-    player: PlayerTypes;
-    token: string;
+    player: PlayerTypes | null;
+    token: string | null;
 };
 
 export type ProtoPlayer = {
