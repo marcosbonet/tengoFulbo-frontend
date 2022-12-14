@@ -1,9 +1,5 @@
 import { MatchType } from '../models/match.types';
-import {
-    PlayerTypes,
-    PlayerWithToken,
-    ProtoPlayer,
-} from '../models/player.types';
+import { PlayerTypes, ProtoPlayer } from '../models/player.types';
 
 const URL = 'http://localhost:7700/';
 
@@ -59,7 +55,7 @@ export class PlayerRepo {
 
     updateadd(id: string): Promise<MatchType> {
         const url = URL + `players/update/${id}`;
-        const token = localStorage.getItem('token');
+        localStorage.getItem('token');
 
         return fetch(url, {
             method: 'PATCH',
@@ -75,7 +71,7 @@ export class PlayerRepo {
     }
     getOne(): Promise<PlayerTypes> {
         const url = URL + `players/getOne`;
-        const token = localStorage.getItem('token');
+        localStorage.getItem('token');
 
         return fetch(url, {
             method: 'GET',

@@ -1,18 +1,11 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { SyntheticEvent, useState } from 'react';
+
 import { useMatch } from '../../infrastructure/hooks/useMatch';
 import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { ProtoMatch } from '../../infrastructure/models/match.types';
-type ProtoMatchtypes = {
-    places: string;
-    date: string;
-    image: string;
-    players: Array<string>;
-};
 
 export function CreateMatch() {
-    const navigate = useNavigate();
-    const initialState: ProtoMatchtypes = {
+    const initialState: ProtoMatch = {
         places: '',
         date: '',
         image: '',
@@ -23,23 +16,16 @@ export function CreateMatch() {
     const { handleCreateMatch } = useMatch();
     const { handleUpdateAddPlayer, player } = usePlayer();
 
-    const handleInput = (ev: React.SyntheticEvent) => {
+    const handleInput = (ev: SyntheticEvent) => {
         const element = ev.target as HTMLFormElement;
         setdata({ ...data, [element.name]: element.value });
     };
 
-    const handleSubmit = async (ev: React.SyntheticEvent) => {
+    const handleSubmit = async (ev: SyntheticEvent) => {
         ev.preventDefault();
-        const newMatch: ProtoMatch = {
-            ...data,
-            places: data.places,
-            date: data.date,
-            image: data.image,
-            players: [],
-        };
-        handleCreateMatch(newMatch);
+
+        handleCreateMatch(data);
         handleUpdateAddPlayer(player.player?.playerName as string);
-        navigate('/Home');
     };
     return (
         <>

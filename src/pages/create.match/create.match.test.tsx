@@ -1,40 +1,57 @@
 import { MemoryRouter as Router } from 'react-router-dom';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
-
+import { useMatch } from '../../infrastructure/hooks/useMatch';
 import userEvent from '@testing-library/user-event';
-
+import { configureStore } from '@reduxjs/toolkit';
 import { CreateMatch } from './create.match';
-import { mockStore } from '../../mock/mockstore';
+import { mockStore, preloadedState } from '../../mock/mockstore';
+import { PlayerReducer } from '../../infrastructure/reducer/reducerPlayer';
+import { MatchReducer } from '../../infrastructure/reducer/reducerMatch';
+jest.mock('../../infrastructure/hooks/useMatch');
+describe('Given Createdmatch component, and ew render it', () => {
+    let formElm: Array<{ role: string; name: string }>;
 
-describe('Given Createdmatch component', () => {
-    describe('When we render the component', () => {
-        test('Then it should display the created match list', () => {
-            render(
-                <>
-                    <Provider store={mockStore}>
-                        <Router>
-                            <CreateMatch></CreateMatch>
-                        </Router>
-                    </Provider>
-                </>
-            );
-            const element = screen.getAllByText(/Create Match/i);
-            expect(element).toBeInTheDocument();
+    beforeEach(() => {
+        const mockAppStore = configureStore({
+            reducer: {
+                player: PlayerReducer,
+                match: MatchReducer,
+            },
+            preloadedState: preloadedState,
+        });
+        formElm = [
+            { role: 'textbox', name: '' },
+            { role: 'textbox', name: '' },
+            { role: 'textbox', name: '' },
+        ];
+
+        (useMatch as jest.Mock).mockReturnValue({
+            handleCreateMatch: jest.fn(),
         });
 
-        test('Then if the user clicks on the create button, it should delete place', async () => {
-            render(
-                <>
-                    <Provider store={mockStore}>
-                        <Router>
-                            <CreateMatch></CreateMatch>
-                        </Router>
-                    </Provider>
-                </>
-            );
-            fireEvent.click(screen.getByRole('button'));
-            userEvent.click(await screen.findByText(/Create Match/i));
+        render(
+            <>
+                <Provider store={mockAppStore}>
+                    <Router>
+                        <CreateMatch></CreateMatch>
+                    </Router>
+                </Provider>
+            </>
+        );
+    });
+
+    test('the handleinput must be called..', () => {
+        const input = screen.getAllByRole(formElm[0].role, {
+            name: formElm[0].name,
         });
+        userEvent.type(input[0], 'depaul');
+        expect(input[0]).toHaveValue('depaul');
+    });
+    test('the handleSubmit must be called..', () => {
+        const submit = screen.getByRole('button');
+        userEvent.click(submit);
+        const result = useMatch().handleCreateMatch;
+        expect(result).toHaveBeenCalled();
     });
 });

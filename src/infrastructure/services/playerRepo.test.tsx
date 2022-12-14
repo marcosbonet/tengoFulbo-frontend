@@ -135,4 +135,23 @@ describe('given de PlayerRepo', () => {
             expect(error).toBeInstanceOf(Error);
         });
     });
+
+    test('Then the getOne must return a player', async () => {
+        global.fetch = jest.fn().mockResolvedValue({
+            ok: true,
+            json: jest.fn().mockResolvedValue(mockPlayer),
+        });
+        await service.getOne();
+        expect(fetch).toHaveBeenCalled();
+    });
+    test('Then if something goes wrong, it should throw an ERROR', async () => {
+        global.fetch = jest.fn().mockRejectedValue({
+            ok: false,
+            status: 404,
+            statusText: 'error',
+        });
+        await service.getOne();
+        expect(fetch).toHaveBeenCalled();
+        expect(error).toBeInstanceOf(Error);
+    });
 });

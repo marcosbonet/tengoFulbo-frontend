@@ -9,6 +9,7 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import { rootState } from '../store/store';
 import { MatchReducer } from '../reducer/reducerMatch';
+import { mockStore } from '../../mock/mockstore';
 jest.mock('../services/PlayerRepo');
 
 const mockPlayer: PlayerTypes = {
@@ -64,6 +65,7 @@ let result: {
         handleDelete: (player: PlayerTypes) => Promise<void>;
         handleUpdateAddPlayer: (idMatch: string) => Promise<void>;
         handleUpdateDeletePlayer: (idMatch: MatchType) => Promise<void>;
+        handleGetOne: () => Promise<void>;
     };
 };
 
@@ -76,6 +78,7 @@ beforeEach(() => {
     (PlayerRepo.prototype.updatedelete as jest.Mock).mockResolvedValue(
         mockPlayer
     );
+    (PlayerRepo.prototype.getOne as jest.Mock).mockResolvedValue(mockPlayer);
 
     (PlayerRepo.prototype.delete as jest.Mock).mockResolvedValue(newMockPlayer);
     const wrapper = ({ children }: { children: JSX.Element }) => (
@@ -109,51 +112,67 @@ test('if we use Handledelete should change the match of a user from the array of
         expect(PlayerRepo.prototype.delete).toHaveBeenCalled();
     });
 });
+test('Then it should return updateAdd have been called', () => {
+    result.current.handleUpdateAddPlayer('1');
+    expect(PlayerRepo.prototype.updateadd).toHaveBeenCalled();
+});
+test('Then it should return UpdateDelete have been called', () => {
+    result.current.handleUpdateDeletePlayer(mockMatch);
+    expect(PlayerRepo.prototype.updatedelete).toHaveBeenCalled();
+});
 
-test('if we use logout should handleUpdateDeletePlayer of a user from the array of users', async () => {
-    await waitFor(async () => {
-        PlayerRepo.prototype.updatedelete = jest
-            .fn()
-            .mockResolvedValue(mockPlayer);
-        await result.current.handleUpdateDeletePlayer([mockPlayer]);
-        expect(PlayerRepo.prototype.updatedelete).toHaveBeenCalled();
+test('Then handleadd should return an error', async () => {
+    const error = new Error('');
+    PlayerRepo.prototype.updateadd = jest.fn().mockRejectedValue(mockPlayer);
+    await waitFor(() => {
+        result.current.handleUpdateAddPlayer(mockMatch.id);
+        expect(error).toBeInstanceOf(Error);
     });
 });
-test('if we use HandleUpdateAddMatch should change the match of a user from the array of player', async () => {
-    await waitFor(async () => {
-        PlayerRepo.prototype.updateadd = jest
-            .fn()
-            .mockResolvedValue(mockPlayer);
-        await result.current.handleUpdateAddPlayer(mockPlayer.id);
-        expect(PlayerRepo.prototype.updateadd).toHaveBeenCalled();
+
+test('Then handledelete should return an error', async () => {
+    const error = new Error('');
+    PlayerRepo.prototype.updatedelete = jest.fn().mockRejectedValue(mockMatch);
+    await waitFor(() => {
+        result.current.handleUpdateDeletePlayer(mockMatch);
+        expect(error).toBeInstanceOf(Error);
     });
 });
-// test('Then handleadd should return an error', async () => {
-//     const error = new Error('');
-//     PlayerRepo.prototype.updateadd = jest
-//         .fn()
-//         .mockRejectedValue(mockPlayer);
-//     await waitFor(() => {
-//         result.current.handleUpdateAddPlayer(mockMatch.id);
-//         expect(error).toBeInstanceOf(Error);
-//     });
-// });
-// test('if we use HandleUpdateDeleteMatch should change the match of a user from the array of player', async () => {
-//     await waitFor(() => {
-//         result.current.handleUpdateDeletePlayer(mockMatch.id);
-//         expect(
-//             PlayerRepo.prototype.updateadd(mockMatch.id)
-//         ).toHaveBeenCalled();
-//     });
-// });
+describe('When we use the handleLogout(),', () => {
+    let spyDispatch: jest.SpyInstance;
 
-// test('Then handledelete should return an error', async () => {
-//     const error = new Error('');
-//     PlayerRepo.prototype.updatedelete = jest
-//         .fn()
-//         .mockRejectedValue(mockPlayer);
-//     await waitFor(() => {
-//         result.current.handleUpdateDeletePlayer(mockPlayer.id);
-//         expect(error).toBeInstanceOf(Error);
-//     });
-// });
+    beforeEach(() => {
+        PlayerRepo.prototype.login = jest.fn().mockResolvedValue(mockPlayer);
+        const wrapper = ({ children }: { children: JSX.Element }) => (
+            <Provider store={mockStore}>{children}</Provider>
+        );
+        spyDispatch = jest.spyOn(mockStore, 'dispatch');
+        ({ result } = renderHook(() => usePlayer(), { wrapper }));
+    });
+
+    test('Then it should return mockUser and have been called', async () => {
+        await waitFor(() => {
+            result.current.handleLogout();
+        });
+        expect(spyDispatch).toHaveBeenCalled();
+    });
+});
+describe('When we use the getOne(),', () => {
+    let spyDispatch: jest.SpyInstance;
+
+    beforeEach(() => {
+        PlayerRepo.prototype.getOne = jest.fn().mockResolvedValue(mockPlayer);
+        const wrapper = ({ children }: { children: JSX.Element }) => (
+            <Provider store={mockStore}>{children}</Provider>
+        );
+        spyDispatch = jest.spyOn(mockStore, 'dispatch');
+        ({ result } = renderHook(() => usePlayer(), { wrapper }));
+    });
+
+    test('Then it should return mockUser and have been called', async () => {
+        await waitFor(() => {
+            result.current.handleGetOne();
+        });
+        expect(spyDispatch).toHaveBeenCalled();
+    });
+});

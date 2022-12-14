@@ -21,7 +21,7 @@ describe('Given the function MatchReducer', () => {
             };
             state = [];
         });
-        test.skip('Then the returned state should be the action payload', () => {
+        test('Then the returned state should be the action payload', () => {
             const result = MatchReducer(state, action);
             expect(result).toEqual(action.payload);
         });
@@ -35,13 +35,13 @@ describe('Given the function MatchReducer', () => {
             };
             state = [];
         });
-        test.skip('Then the returned state should include the action payload', () => {
+        test('Then the returned state should include the action payload', () => {
             const result = MatchReducer(state, action);
             expect(result).toEqual(action.payload);
         });
     });
-    describe('When the action is UPDATE', () => {
-        test.skip('if the id is valid, then the returned state should include the action payload', () => {
+    describe('When the action is ADD', () => {
+        test('if the id is valid, then the returned state should include the action payload', () => {
             action = {
                 type: actionMatchType.updateAdd,
                 payload: { ...matchMock, places: '' },
@@ -50,8 +50,17 @@ describe('Given the function MatchReducer', () => {
             const result = MatchReducer(state, action);
             expect(result).toEqual([action.payload]);
         });
+        test('if the id is valid on the map, then the returned state should include the action payload', () => {
+            action = {
+                type: actionMatchType.updateAdd,
+                payload: { ...matchMock, places: '' },
+            };
+            state = [matchMock];
+            const result = MatchReducer(state, action);
+            expect(result).toStrictEqual([action.payload]);
+        });
 
-        test.skip('if the id is NOT valid, then the returned state should be the action payload', () => {
+        test('if the id is NOT valid, then the returned state should be the action payload', () => {
             action = {
                 type: actionMatchType.updateAdd,
                 payload: { ...matchMock, id: '9', places: 'Updated Place' },
@@ -63,17 +72,17 @@ describe('Given the function MatchReducer', () => {
     });
 
     describe('When the action is DELETE', () => {
-        test.skip('if the id is valid, then the return state should include the action payload', () => {
+        test('if the id is valid, then the return state should include the action payload', () => {
             action = {
                 type: actionMatchType.updateDelete,
-                payload: matchMock,
+                payload: '6389bb90ed3e6a5b94faa5a9',
             };
             state = [matchMock];
             const result = MatchReducer(state, action);
             expect(result).toStrictEqual([matchMock]);
         });
 
-        test.skip('if the id is NOT valid, then the returned state should not include the action payload', () => {
+        test('if the id is NOT valid, then the returned state should not include the action payload', () => {
             action = {
                 type: actionMatchType.updateDelete,
                 payload: { ...matchMock, id: '9' },
@@ -85,7 +94,7 @@ describe('Given the function MatchReducer', () => {
     });
 
     describe('When the action type is any other', () => {
-        test.skip('Then the returned state should not include the action payload', () => {
+        test('Then the returned state should not include the action payload', () => {
             action = {
                 type: '',
                 payload: null,

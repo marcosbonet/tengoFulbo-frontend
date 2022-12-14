@@ -14,30 +14,23 @@ export const useMatch = () => {
     const apiPlayer = useMemo(() => new PlayerRepo(), []);
 
     const handleLoad = useCallback(() => {
-        apiMatch
-            .get()
-            .then((response) => {
-                dispatcher(ac.loadActionCreator(response));
-            })
-            .catch((error: Error) => console.log(error.name, error.message));
+        apiMatch.get().then((response) => {
+            dispatcher(ac.loadActionCreator(response));
+        });
     }, [apiMatch, dispatcher]);
 
     const handleCreateMatch = (newMatch: ProtoMatch) => {
         apiMatch
             .create(newMatch)
-            .then((matches) => dispatcher(ac.createActionCreator(matches)))
-            .catch((error: Error) => console.log(error.name, error.message));
+            .then((matches) => dispatcher(ac.createActionCreator(matches)));
     };
     const handleUpdateAddMatch = async (idMatch: string) => {
         console.log('2');
-        await apiPlayer
-            .updateadd(idMatch)
-            .then((matchUpdated) => {
-                console.log(matchUpdated, 'Que SOY?');
-                dispatcher(ac.updateAddMatchctionCreator(matchUpdated));
-                handleLoad();
-            })
-            .catch((error: Error) => console.log(error.name, error.message));
+        await apiPlayer.updateadd(idMatch).then((matchUpdated) => {
+            console.log(matchUpdated, 'Que SOY?');
+            dispatcher(ac.updateAddMatchctionCreator(matchUpdated));
+            handleLoad();
+        });
     };
 
     const handleUpdateDeleteMatch = async (idMatch: MatchType) => {

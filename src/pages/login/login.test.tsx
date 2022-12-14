@@ -1,13 +1,26 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { mockStore } from '../../mock/mockstore';
 import userEvent from '@testing-library/user-event';
+
+import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { LoginPage } from './login.page';
 
+jest.mock('../../infrastructure/hooks/usePlayer');
 describe('Given the Login page component', () => {
     describe('When we render it', () => {
+        let Login: Array<{ role: string; name: string }>;
         beforeEach(() => {
+            Login = [
+                {
+                    role: 'textbox',
+                    name: '',
+                },
+            ];
+            (usePlayer as jest.Mock).mockReturnValue({
+                handleLogin: jest.fn(),
+            });
             render(
                 <Router>
                     <Provider store={mockStore}>
@@ -21,29 +34,17 @@ describe('Given the Login page component', () => {
                 screen.getByRole('heading', { name: /Login/i })
             ).toBeInTheDocument();
         });
-        test('Then it should display form of login', async () => {
-            render(
-                <Router>
-                    <Provider store={mockStore}>
-                        <LoginPage />
-                    </Provider>
-                </Router>
-            );
-            // const element = await screen.findByPlaceholderText(/Name/i);
-            //expect(element).toBeInTheDocument();
-            fireEvent.input(await screen.findByPlaceholderText('Login'));
+        test('Should save the inputs names', () => {
+            const input = screen.getByRole(Login[0].role, {
+                name: Login[0].name,
+            });
+            userEvent.type(input, 'test');
+            expect(input).toHaveValue('test');
         });
-        test('Then it should display of welcome', async () => {
-            render(
-                <Router>
-                    <Provider store={mockStore}>
-                        <LoginPage />
-                    </Provider>
-                </Router>
-            );
-            //  const element = await screen.findByText(/password/i);
-            //  expect(element).toBeInTheDocument();
-            userEvent.click(await screen.findByRole('button'));
+        test('Then it should render the logIn form..', () => {
+            const element = screen.getByRole('button');
+            userEvent.click(element);
+            expect(usePlayer().handleLogin).toHaveBeenCalled();
         });
     });
 });

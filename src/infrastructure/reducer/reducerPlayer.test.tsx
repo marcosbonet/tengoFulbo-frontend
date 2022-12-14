@@ -75,6 +75,22 @@ describe('Given the function PlayerReducer', () => {
             expect(result.player?.matches).toEqual([action.payload]);
         });
     });
+    describe('When the action is UPDATEAPP adn get a error', () => {
+        test('Then the return state should include the updated action payload', () => {
+            action = {
+                type: actionPlayerTypes.updateAdd,
+                payload: { player: PlayerMock, token: 'token' },
+            };
+            state = {
+                ...state,
+                isLogged: true,
+                player: PlayerMock,
+                token: 'token',
+            };
+            const result = PlayerReducer(state, action);
+            expect(result.player?.matches).not.toContain([action.payload]);
+        });
+    });
 
     describe('When the action is DELETEFAV', () => {
         test('Then the return state should include the updated action payload', () => {

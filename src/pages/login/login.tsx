@@ -1,17 +1,18 @@
 import { SyntheticEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { ProtoPlayer } from '../../infrastructure/models/player.types';
+import style from './login.module.css';
 
 export function Login() {
-    const navigate = useNavigate();
     const initialState: ProtoPlayer = {
         playerName: '',
         password: '',
         email: '',
     };
 
-    const { handleLogin, player } = usePlayer();
+    const { handleLogin } = usePlayer();
     const [data, setdata] = useState(initialState);
 
     const handleInput = (ev: SyntheticEvent) => {
@@ -23,8 +24,6 @@ export function Login() {
         ev.preventDefault();
 
         handleLogin(data);
-
-        navigate('/home');
     };
 
     return (
@@ -50,8 +49,23 @@ export function Login() {
                     />
                 </div>
 
-                <button type="submit">Login</button>
+                <button
+                    name="login"
+                    type="submit"
+                    className={style['form__input--submit']}
+                >
+                    Login
+                </button>
             </form>
+            <div className={style.form__info}>
+                <p className={style['form__info--or']}>or</p>
+                <p>
+                    don't have an account?{' '}
+                    <Link to="/register" className={style.form__loginButton}>
+                        register
+                    </Link>
+                </p>
+            </div>
         </>
     );
 }

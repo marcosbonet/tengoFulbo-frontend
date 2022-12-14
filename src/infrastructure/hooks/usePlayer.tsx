@@ -15,13 +15,10 @@ export const usePlayer = () => {
     const apiPlayer = useMemo(() => new PlayerRepo(), []);
 
     const handleLogin = async (data: ProtoPlayer) => {
-        await apiPlayer
-            .login(data)
-            .then((response) => {
-                console.log(response);
-                dispatcher(ac.loginActionCreator(response));
-            })
-            .catch((error: Error) => console.log(error.name, error.message));
+        await apiPlayer.login(data).then((response) => {
+            console.log(response);
+            dispatcher(ac.loginActionCreator(response));
+        });
     };
 
     const handleLogout = async () => {
@@ -56,8 +53,7 @@ export const usePlayer = () => {
     const handleGetOne = async () => {
         await apiPlayer
             .getOne()
-            .then((player) => dispatcher(ac.getOneActionCreator(player)))
-            .catch((error: Error) => console.log(error.name, error.message));
+            .then((player) => dispatcher(ac.getOneActionCreator(player)));
     };
 
     return {
