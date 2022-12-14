@@ -29,7 +29,7 @@ export function CreateMatch() {
     };
     return (
         <>
-            <div className={style.container}>
+            <div className={`${style.container} ${style.zoomInDown}`}>
                 <h2 className={style.form__tittle}>Create Match</h2>
                 <form onSubmit={handleSubmit} className={style.form}>
                     <div>
@@ -61,13 +61,10 @@ export function CreateMatch() {
                             onInput={handleInput}
                             className={style.form__input}
                         />
-                        <button
-                            type="submit"
-                            className={style.form__loginButton}
-                        >
-                            Create Match
-                        </button>
                     </div>
+                    <button type="submit" className={style.btn}>
+                        Create Match
+                    </button>
                 </form>
             </div>
         </>

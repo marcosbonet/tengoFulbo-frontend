@@ -29,7 +29,7 @@ export function Login() {
     return (
         <>
             {' '}
-            <div className={style.container}>
+            <div className={`${style.container} ${style.fadeInLeft}`}>
                 <h2 className={style.form__tittle}>Login</h2>
                 <form onSubmit={handleSubmit} className={style.form}>
                     <div>

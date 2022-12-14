@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+.info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+.buttonContainer {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.buttonn {
+    width: 250px;
+    height: 40px;
+    background-color: firebrick;
+    border: 2px solid rgb(54, 14, 14);
+    color: rgb(255, 255, 255);
+    border-radius: 20px;
+}

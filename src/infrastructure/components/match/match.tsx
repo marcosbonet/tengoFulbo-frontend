@@ -14,7 +14,7 @@ export function ItemMatch({ item }: { item: MatchType }) {
 
     return (
         <>
-            <li className={Styles.containermatch}>
+            <li className={`${Styles.containermatch} ${Styles.flipInX}`}>
                 <div>
                     <img
                         className={Styles.matchimage}

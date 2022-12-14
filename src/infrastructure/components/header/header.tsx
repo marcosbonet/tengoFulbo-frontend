@@ -12,6 +12,7 @@ export function Header() {
                             src={'./assets/messilogo.png'}
                             alt="Messi"
                             width="50px"
+                            className={styles.messi}
                         />
                     </Link>
                 </div>

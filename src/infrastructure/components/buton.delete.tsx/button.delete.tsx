@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { usePlayer } from '../../hooks/usePlayer';
 import { PlayerRepo } from '../../services/playerRepo';
+import style from './button.delete.module.css';
 
 export function DeletePlayer() {
     const navigate = useNavigate();
@@ -20,17 +21,19 @@ export function DeletePlayer() {
 
     return (
         <>
-            <div>
-                <img
-                    src="https://images2.minutemediacdn.com/image/upload/c_fill,w_2160,ar_16:9,f_auto,q_auto,g_auto/shape%2Fcover%2Fsport%2Fdataimagepngbase64iVBORw0KGgoAAAANSUhEUgAAAtMAAAIU-52f8e3c40f92300de1e18107fd9ab60c.jpg"
-                    alt={player1?.playerName}
-                    width="100px"
-                />
-                <p>Player Name: {player1?.playerName}</p>
-                <p>Email: {player1?.email}</p>
+            <div className={style.buttonContainer}>
+                <div className={style.info}>
+                    <p>Player Name: {player1?.playerName}</p>
+                    <p>Email: {player1?.email}</p>
+                </div>
+
+                <button onClick={logout} className={style.buttonn}>
+                    Logout
+                </button>
+                <button className={style.buttonn} onClick={handleDelete}>
+                    Delete Account
+                </button>
             </div>
-            <button onClick={logout}>Logout</button>
-            <button onClick={handleDelete}>Delete Account</button>
         </>
     );
 }

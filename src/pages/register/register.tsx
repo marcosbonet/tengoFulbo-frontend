@@ -26,7 +26,7 @@ export function Register() {
     return (
         <>
             {' '}
-            <div className={style.container}>
+            <div className={`${style.container} ${style.fadeInRight}`}>
                 <h2 className={style.form__tittle}>Register</h2>
                 <form onSubmit={handleSubmit} className={style.form}>
                     <div>
