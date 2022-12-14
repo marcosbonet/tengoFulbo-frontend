@@ -33,7 +33,7 @@ describe('Given App component', () => {
             });
         });
         test('Then it should display the title', () => {
-            const element = screen.getByText(/Tengo/i);
+            const element = screen.getByText(/Bonet/i);
             expect(element).toBeInTheDocument();
         });
     });
