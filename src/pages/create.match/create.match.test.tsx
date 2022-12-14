@@ -5,7 +5,7 @@ import { useMatch } from '../../infrastructure/hooks/useMatch';
 import userEvent from '@testing-library/user-event';
 import { configureStore } from '@reduxjs/toolkit';
 import { CreateMatch } from './create.match';
-import { mockStore, preloadedState } from '../../mock/mockstore';
+import { preloadedState } from '../../mock/mockstore';
 import { PlayerReducer } from '../../infrastructure/reducer/reducerPlayer';
 import { MatchReducer } from '../../infrastructure/reducer/reducerMatch';
 jest.mock('../../infrastructure/hooks/useMatch');
