@@ -65,7 +65,7 @@ let result: {
         handleDelete: (player: PlayerTypes) => Promise<void>;
         handleUpdateAddPlayer: (idMatch: string) => Promise<void>;
         handleUpdateDeletePlayer: (idMatch: MatchType) => Promise<void>;
-        handleGetOne: () => Promise<void>;
+        handleGetOne: () => void;
     };
 };
 
