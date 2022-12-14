@@ -59,15 +59,14 @@ describe('Given the function MatchReducer', () => {
             const result = MatchReducer(state, action);
             expect(result).toStrictEqual([action.payload]);
         });
-
-        test('if the id is NOT valid, then the returned state should be the action payload', () => {
+        test('if the id is valid on the map, then the returned state should include the action payload NULL', () => {
             action = {
                 type: actionMatchType.updateAdd,
-                payload: { ...matchMock, id: '9', places: 'Updated Place' },
+                payload: matchMock,
             };
             state = [matchMock];
             const result = MatchReducer(state, action);
-            expect(result).toEqual(state);
+            expect(result).toStrictEqual([action.payload]);
         });
     });
 

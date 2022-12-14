@@ -7,11 +7,10 @@ export const MyMatchList = () => {
 
     useEffect(() => {
         handleGetOne();
-    }, []);
+    }, [handleGetOne]);
 
     function render() {
-        if (player.player?.matches.length !== 0 || player.player !== null)
-            return true;
+        if (player.player?.matches) return true;
         return false;
     }
 

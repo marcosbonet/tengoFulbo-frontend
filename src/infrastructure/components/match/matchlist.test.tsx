@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { MatchList } from './matchlist';
 import { mockStore } from '../../../mock/mockstore';
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 
 describe('Given GifList component', () => {
     describe('When we render the component', () => {

@@ -16,7 +16,7 @@ export const MatchReducer = createReducer(initialState, (builder) => {
     );
 
     builder.addCase(ac.updateAddMatchctionCreator, (state, action) =>
-        state.map((item) => (item === action.payload ? action.payload : item))
+        state.map((item) => (item = action.payload))
     );
 
     builder.addDefaultCase((state) => state);

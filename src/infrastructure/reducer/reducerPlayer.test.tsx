@@ -91,6 +91,19 @@ describe('Given the function PlayerReducer', () => {
             expect(result.player?.matches).not.toContain([action.payload]);
         });
     });
+    describe('When the action is GETONE', () => {
+        test('Then the return state should include the updated action payload', () => {
+            action = {
+                type: actionPlayerTypes.getOne,
+                payload: PlayerMock,
+            };
+            state = {
+                ...state,
+            };
+            const result = PlayerReducer(state, action);
+            expect(result.player?.matches).not.toContain([action.payload]);
+        });
+    });
 
     describe('When the action is DELETEFAV', () => {
         test('Then the return state should include the updated action payload', () => {
