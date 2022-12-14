@@ -1,77 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
-/* .flipInX {
-    -webkit-backface-visibility: visible !important;
-    backface-visibility: visible !important;
-    -webkit-animation-name: flipInX;
-    animation-name: flipInX;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-}
-@-webkit-keyframes flipInX {
-    0% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        -webkit-transition-timing-function: ease-in;
-        transition-timing-function: ease-in;
-        opacity: 0;
-    }
-    40% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        -webkit-transition-timing-function: ease-in;
-        transition-timing-function: ease-in;
-    }
-    60% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        opacity: 1;
-    }
-    80% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    }
-    100% {
-        -webkit-transform: perspective(400px);
-        transform: perspective(400px);
-    }
-}
-@keyframes flipInX {
-    0% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
-        -webkit-transition-timing-function: ease-in;
-        transition-timing-function: ease-in;
-        opacity: 0;
-    }
-    40% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
-        -webkit-transition-timing-function: ease-in;
-        transition-timing-function: ease-in;
-    }
-    60% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
-        opacity: 1;
-    }
-    80% {
-        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
-    }
-    100% {
-        -webkit-transform: perspective(400px);
-        transform: perspective(400px);
-    }
-} */
 
 .containermatch {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 5px;
+
     background-color: #c5c3c374;
     border-radius: 40px;
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.208);
@@ -98,7 +32,7 @@
     cursor: pointer;
 }
 .matchLi {
-    box-shadow: 13px 13px13px #000;
+    box-shadow: 13px 13px 13px #000;
     border-radius: 40px;
 }
 .matchImage {

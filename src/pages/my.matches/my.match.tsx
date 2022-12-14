@@ -1,7 +1,7 @@
 import { usePlayer } from '../../infrastructure/hooks/usePlayer';
 import { MatchType } from '../../infrastructure/models/match.types';
 import style from './my.match.module.css';
-import styles from './my.match.module.css';
+
 export function MyMatches({ match }: { match: MatchType }) {
     const { handleUpdateDeletePlayer } = usePlayer();
 
@@ -14,7 +14,7 @@ export function MyMatches({ match }: { match: MatchType }) {
             <main>
                 <li
                     key={Math.floor(Math.random() * 1000000)}
-                    className={styles.li}
+                    className={style.li}
                 >
                     <div className={style.dic_img}>
                         <img

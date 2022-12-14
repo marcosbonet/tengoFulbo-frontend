@@ -26,7 +26,6 @@
 
 .form__input,
 .form__input--submit {
-    border-radius: 30 6 px;
     width: 343px;
     height: 65px;
     padding: 20px;
@@ -87,7 +86,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    margin-bottom: 5px;
+
     width: 343px;
     height: 65px;
     margin-bottom: 15px;
