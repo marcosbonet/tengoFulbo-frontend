@@ -16,9 +16,7 @@ export const MatchList = () => {
         <>
             <ul className={Styles.matchul}>
                 {matches.map((match: MatchType) => (
-                    <li className={Styles.matchLi}>
-                        <ItemMatch key={match.id} item={match}></ItemMatch>
-                    </li>
+                    <ItemMatch key={match.id} item={match}></ItemMatch>
                 ))}
             </ul>
         </>
