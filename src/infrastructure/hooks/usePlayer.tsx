@@ -16,7 +16,6 @@ export const usePlayer = () => {
 
     const handleLogin = async (data: ProtoPlayer) => {
         await apiPlayer.login(data).then((response) => {
-            console.log(response);
             dispatcher(ac.loginActionCreator(response));
         });
     };
@@ -43,7 +42,6 @@ export const usePlayer = () => {
     };
 
     const handleUpdateDeletePlayer = async (idMatch: MatchType) => {
-        console.log(idMatch.id, 'soy un id');
         await apiPlayer
             .updatedelete(idMatch.id)
             .then(() => dispatcher(ac.updateDeleteActionCreator(idMatch)))

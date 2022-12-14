@@ -1,14 +1,14 @@
-import { configureStore, current } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { renderHook, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { mockPlayer, preloadedState } from '../../mock/mockstore';
+import { preloadedState } from '../../mock/mockstore';
 import { useMatch } from '../hooks/useMatch';
 import { MatchType, ProtoMatch } from '../models/match.types';
 import { MatchReducer } from '../reducer/reducerMatch';
 import { PlayerReducer } from '../reducer/reducerPlayer';
 import { MatchRepo } from '../services/matchRepo';
 import { PlayerRepo } from '../services/playerRepo';
-import { rootState, rootStore } from '../store/store';
+
 jest.mock('../services/matchRepo');
 describe('Given the hook useMatch()', () => {
     const protoMatch: ProtoMatch = {
@@ -21,13 +21,7 @@ describe('Given the hook useMatch()', () => {
         ...protoMatch,
         id: '1234',
     };
-    const newMockMatch: MatchType = {
-        id: '123',
-        places: 'boca',
-        image: 'papa',
-        date: '4 de diciembre',
-        players: [],
-    };
+
     const updateMockMatch: MatchType = {
         id: '443',
         places: 'peñarol',

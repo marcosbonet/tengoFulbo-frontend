@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MatchRepo } from '../services/matchRepo';
 import { rootState } from '../store/store';
@@ -25,9 +25,7 @@ export const useMatch = () => {
             .then((matches) => dispatcher(ac.createActionCreator(matches)));
     };
     const handleUpdateAddMatch = async (idMatch: string) => {
-        console.log('2');
         await apiPlayer.updateadd(idMatch).then((matchUpdated) => {
-            console.log(matchUpdated, 'Que SOY?');
             dispatcher(ac.updateAddMatchctionCreator(matchUpdated));
             handleLoad();
         });

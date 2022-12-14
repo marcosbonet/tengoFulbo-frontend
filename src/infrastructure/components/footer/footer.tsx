@@ -14,7 +14,7 @@ export function Footer() {
 
             <p className={styles.bymarcos}> By Marcos Bonet</p>
 
-            <address> Copyright © Nirvana 2022 All rights reserve</address>
+            <address> Copyright © Tengo Fulbo 2022 All rights reserve</address>
         </footer>
     );
 }
